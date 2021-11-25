@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { ProductProvider } from "./context/ProductContext";
 import { UserProvider } from "./context/UserContext";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -12,12 +13,12 @@ function App() {
         <Header />
         <ProductProvider>
           <Routes>
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/home" element={<Card />} />
-            <Route path="/" element={<div>Hello World</div>} />
           </Routes>
         </ProductProvider>
-        <Footer />
       </UserProvider>
+      <Footer />
     </>
   );
 }
