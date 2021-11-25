@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* -------------- Header.jsx -------------- */
+.nav-link {
+  @apply rounded px-2 py-1 my-1 text-base text-gray-700 font-medium hover:text-indigo-500 lg:mx-4 lg:my-0 hover:bg-gray-200;
+}
+
+.account-dropdown {
+  @apply block px-4 py-3 text-sm text-gray-900 capitalize transition-colors duration-200 transform hover:bg-gray-100;
+}
+
+/* -------------- End of Header.jsx -------------- */
