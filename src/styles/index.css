@@ -788,9 +788,6 @@ video {
 .flex-col {
 	flex-direction: column;
 }
-.items-end {
-	align-items: flex-end;
-}
 .items-center {
 	align-items: center;
 }
@@ -1230,6 +1227,10 @@ video {
 
 	.lg\:flex-row {
 		flex-direction: row;
+	}
+
+	.lg\:items-end {
+		align-items: flex-end;
 	}
 
 	.lg\:items-center {

@@ -24,7 +24,18 @@ function Login() {
     resolver: yupResolver(loginFormSchema),
   });
 
-  useEffect(() => {}, [postError, token]);
+  useEffect(() => {
+    //redirect
+    if (postError) {
+      if (!postError.response.status === 401) {
+        navigate("/404");
+      }
+    } else if (token) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [postError, token, navigate]);
 
   //submit
   const onSubmit = async (formData) => {
@@ -57,17 +68,6 @@ function Login() {
     }
   };
 
-  //redirect
-  if (postError) {
-    if (!postError.response.status === 401) {
-      navigate("/404");
-    }
-  } else if (token) {
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
-  }
-
   return (
     <>
       <section className="w-full min-h-screen bg-login bg-no-repeat bg-cover bg-center flex items-center justify-center pt-4">
@@ -83,7 +83,7 @@ function Login() {
           </div>
         </div>
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-end justify-center h-full">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end justify-center h-full">
             <div className="w-full lg:w-1/2 max-w-sm pb-10">
               <div className="bg-white px-6 pt-6 pb-8 mb-4 rounded-lg shadow-lg">
                 <div className="mb-4">

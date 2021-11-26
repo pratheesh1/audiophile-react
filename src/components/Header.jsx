@@ -51,16 +51,32 @@ function Header() {
             }`}
           >
             <div className="flex flex-col lg:flex-row lg:mx-6">
-              <a className="nav-link" href="/">
+              <a
+                className="nav-link"
+                href="/"
+                onClick={() => setIsOpen(!isOpen)}
+              >
                 Home
               </a>
-              <a className="nav-link" href="/">
+              <a
+                className="nav-link"
+                href="/"
+                onClick={() => setIsOpen(!isOpen)}
+              >
                 Shop
               </a>
-              <a className="nav-link" href="/">
+              <a
+                className="nav-link"
+                href="/"
+                onClick={() => setIsOpen(!isOpen)}
+              >
                 Contact
               </a>
-              <a className="nav-link" href="/">
+              <a
+                className="nav-link"
+                href="/"
+                onClick={() => setIsOpen(!isOpen)}
+              >
                 About
               </a>
 
@@ -116,12 +132,12 @@ function Header() {
                           dropdownIsOpen ? "block" : "hidden"
                         }`}
                       >
-                        <a href="/" className="account-dropdown">
+                        <NavLink to="/profile" className="account-dropdown">
                           Your profile{" "}
-                        </a>
-                        <a href="/" className="account-dropdown">
+                        </NavLink>
+                        <NavLink to="/help" className="account-dropdown">
                           Help{" "}
-                        </a>
+                        </NavLink>
                         <a href="/users/logout" className="account-dropdown">
                           Sign Out{" "}
                         </a>
@@ -131,22 +147,30 @@ function Header() {
                 </span>
               ) : (
                 <span>
-                  <NavLink to="/login" className="nav-link">
+                  <NavLink
+                    to="/login"
+                    className="nav-link"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
                     Login
                   </NavLink>
-                  <NavLink to="/register" className="nav-link">
+                  <NavLink
+                    to="/register"
+                    className="nav-link"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
                     Register
                   </NavLink>
                 </span>
               )}
 
               {/* cart */}
-              <a
+              <NavLink
                 className="relative text-gray-700 hover:text-gray-600 pt-2 pr-5"
-                href="/"
+                to="/cart"
               >
                 <CartImage count={user?.cart?.length ? user.cart.length : 0} />
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

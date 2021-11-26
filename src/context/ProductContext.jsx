@@ -6,7 +6,6 @@ const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
   const { data, fetchError, isLoading } = useAxiosGet(`${apiBaseUrl}/products`);
-  console.log(apiBaseUrl);
 
   return (
     <ProductContext.Provider
