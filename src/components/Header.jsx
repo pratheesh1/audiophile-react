@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   BrandImage,
   CartImage,
@@ -13,7 +13,7 @@ import { NavLink } from "react-router-dom";
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  const { user } = React.useContext(UserContext);
+  const { user, setIsLoggedIn } = useContext(UserContext);
 
   return (
     <>
@@ -138,9 +138,13 @@ function Header() {
                         <NavLink to="/help" className="account-dropdown">
                           Help{" "}
                         </NavLink>
-                        <a href="/users/logout" className="account-dropdown">
+                        <NavLink
+                          to="/"
+                          className="account-dropdown"
+                          onClick={() => setIsLoggedIn(false)}
+                        >
                           Sign Out{" "}
-                        </a>
+                        </NavLink>
                       </span>
                     </button>
                   </div>

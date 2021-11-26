@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import UserContext from "../context/UserContext";
@@ -10,7 +10,7 @@ import { loginFormSchema } from "../validators/form";
 
 function Login() {
   //state
-  const { token, setToken } = React.useContext(UserContext);
+  const { token, setToken } = useContext(UserContext);
   const [postError, setPostError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();

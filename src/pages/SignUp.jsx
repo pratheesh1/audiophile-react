@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupFormSchema } from "../validators/form";
@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 function SignUp() {
   //state
-  const { token, setToken } = React.useContext(UserContext);
+  const { token, setToken } = useContext(UserContext);
   const [postError, setPostError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
