@@ -16,5 +16,18 @@
 .footer-link {
   @apply block mt-2 text-sm text-gray-600 hover:underline;
 }
-
 /* -------------- End of Footer.jsx -------------- */
+
+/* -------------- SignUp.jsx -------------- */
+.signup-form {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-xl focus:border focus:border-blue-400;
+}
+
+.signup-form-label {
+  @apply block text-gray-700 text-sm font-medium mb-2;
+}
+
+.signup-form-error {
+  @apply block text-red-500 text-xs italic;
+}
+/* -------------- End of SignUp.jsx -------------- */

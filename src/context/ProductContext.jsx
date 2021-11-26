@@ -1,13 +1,11 @@
 import { createContext } from "react";
-import useAxiosFetch from "../hooks/useAxiosFetch";
+import useAxiosGet from "../hooks/useAxiosGet";
 import { apiBaseUrl } from "../api/link";
 
 const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
-  const { data, fetchError, isLoading } = useAxiosFetch(
-    `${apiBaseUrl}/products`
-  );
+  const { data, fetchError, isLoading } = useAxiosGet(`${apiBaseUrl}/products`);
   console.log(apiBaseUrl);
 
   return (

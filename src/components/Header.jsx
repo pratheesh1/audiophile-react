@@ -8,6 +8,7 @@ import {
 } from "./Images";
 import UserContext from "../context/UserContext";
 import avatar from "../assets/images/avatar.png";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,12 +131,12 @@ function Header() {
                 </span>
               ) : (
                 <span>
-                  <a href="/users/login" className="nav-link">
+                  <NavLink to="/login" className="nav-link">
                     Login
-                  </a>
-                  <a href="/users/register" className="nav-link">
+                  </NavLink>
+                  <NavLink to="/register" className="nav-link">
                     Register
-                  </a>
+                  </NavLink>
                 </span>
               )}
 

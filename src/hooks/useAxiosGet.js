@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const useAxios = (apiUrl) => {
+const useAxiosGet = (apiUrl) => {
   const [data, setData] = useState([]);
-  const [fetchError, setFetchError] = useState(null);
+  const [getError, setGetError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const mounted = useRef(false);
 
@@ -22,7 +22,7 @@ const useAxios = (apiUrl) => {
         }
       } catch (error) {
         if (mounted.current) {
-          setFetchError(error.message);
+          setGetError(error.message);
         }
       } finally {
         mounted.current && setIsLoading(false);
@@ -38,7 +38,7 @@ const useAxios = (apiUrl) => {
     return cleanUp;
   }, [apiUrl]);
 
-  return { data, fetchError, isLoading };
+  return { data, getError, isLoading };
 };
 
-export default useAxios;
+export default useAxiosGet;

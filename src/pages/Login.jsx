@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signupFormSchema } from "../validators/form";
 import UserContext from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../api/link";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { loginFormSchema } from "../validators/form";
 
-function SignUp() {
+function Login() {
   //state
   const { token, setToken } = React.useContext(UserContext);
   const [postError, setPostError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfPassword, setShowConfPassword] = useState(false);
   const navigate = useNavigate();
 
   //form
@@ -22,19 +21,19 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signupFormSchema),
+    resolver: yupResolver(loginFormSchema),
   });
 
-  useEffect(() => {}, [postError]);
+  useEffect(() => {}, [postError, token]);
 
   //submit
   const onSubmit = async (formData) => {
     const { confirmPassword, ...userData } = formData;
-    const signupToast = toast.loading("Signing you up...");
+    const signupToast = toast.loading("Logging you in...");
     try {
-      const user = await axios.post(`${apiBaseUrl}/users/register`, userData);
+      const user = await axios.post(`${apiBaseUrl}/users/login`, userData);
       toast.update(signupToast, {
-        render: "Signup successful! Redirecting...",
+        render: "Login successful!",
         type: "success",
         isLoading: true,
         closeButton: true,
@@ -43,13 +42,14 @@ function SignUp() {
     } catch (err) {
       const errorMsg =
         err.response.status === 401
-          ? "An account with this email already exists. Please login."
-          : "Signup failed! Please try again";
+          ? "Invalid email or password. Please try again."
+          : "Login failed! Please try again";
       toast.update(signupToast, {
         render: errorMsg,
         type: "error",
         isLoading: false,
         closeButton: true,
+        autoClose: 5000,
       });
       setTimeout(() => {
         err && setPostError(err);
@@ -87,45 +87,9 @@ function SignUp() {
             <div className="w-full lg:w-1/2 max-w-sm pb-10">
               <div className="bg-white px-6 pt-6 pb-8 mb-4 rounded-lg shadow-lg">
                 <div className="mb-4">
-                  <h1 className="text-center text-2xl font-bold">Sign Up</h1>
+                  <h1 className="text-center text-2xl font-bold">Login</h1>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  {/* first name */}
-                  <div className="mb-4">
-                    <label className="signup-form-label" htmlFor="firstName">
-                      First Name
-                    </label>
-                    <input
-                      className="signup-form"
-                      id="firstName"
-                      type="text"
-                      {...register("firstName")}
-                      placeholder="First Name"
-                    />
-                    {errors.firstName && (
-                      <p className="signup-form-error">
-                        {errors.firstName.message}
-                      </p>
-                    )}
-                  </div>
-                  {/* last name */}
-                  <div className="mb-4">
-                    <label className="signup-form-label" htmlFor="lastName">
-                      Last Name
-                    </label>
-                    <input
-                      className="signup-form"
-                      id="lastName"
-                      type="text"
-                      {...register("lastName")}
-                      placeholder="Last Name"
-                    />
-                    {errors.lastName && (
-                      <p className="signup-form-error">
-                        {errors.lastName.message}
-                      </p>
-                    )}
-                  </div>
                   {/* email */}
                   <div className="mb-4">
                     <label className="signup-form-label" htmlFor="Email">
@@ -169,44 +133,19 @@ function SignUp() {
                       </p>
                     )}
                   </div>
-                  {/* confirm password */}
-                  <div className="mb-6 relative">
-                    <label className="signup-form-label" htmlFor="password">
-                      Confirm Password
-                      <span
-                        role="button"
-                        onClick={() => setShowConfPassword(!showConfPassword)}
-                        className={`fa fa-fw fa-eye ${
-                          showConfPassword ? "fa-eye-slash" : ""
-                        } field-icon toggle-password absolute top-10 right-2`}
-                      ></span>
-                    </label>
-                    <input
-                      className="mb-3 signup-form"
-                      id="password"
-                      type={showConfPassword ? "text" : "password"}
-                      {...register("confirmPassword")}
-                      placeholder="******************"
-                    />
-                    {errors.confirmPassword && (
-                      <p className="signup-form-error">
-                        {errors.confirmPassword.message}
-                      </p>
-                    )}
-                  </div>
                   <div className="flex items-center justify-between">
                     <Link
-                      to="/login"
+                      to="/register"
                       className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                     >
-                      Already have an account?{" "}
-                      <span className="underline px-1">Sign In</span>
+                      Not a member?
+                      <span className="underline px-1">Sign Up</span>
                     </Link>
                     <button
                       className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline whitespace-nowrap"
                       type="submit"
                     >
-                      Sign Up
+                      Login
                     </button>
                   </div>
                 </form>
@@ -221,4 +160,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Login;

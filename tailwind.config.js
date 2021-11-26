@@ -5,12 +5,16 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: "false", // or 'media' or 'class'
   theme: {
-    extend: {},
-  },
-  variants: {
     extend: {
       colors: { ...supportedColors },
     },
+    backgroundImage: {
+      login:
+        "url('https://images.unsplash.com/photo-1535925191244-17536ca4f8b6')",
+    },
+  },
+  variants: {
+    extend: {},
   },
   plugins: [],
 };
