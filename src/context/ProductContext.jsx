@@ -5,7 +5,7 @@ import { apiBaseUrl } from "../api/link";
 const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
-  const { data, fetchError, isLoading } = useAxiosGet(`${apiBaseUrl}/products`);
+  const { data, getError, isLoading } = useAxiosGet(`${apiBaseUrl}/products`);
   const { data: categories } = useAxiosGet(`${apiBaseUrl}/products/categories`);
   const { data: brands } = useAxiosGet(`${apiBaseUrl}/products/brands`);
   const { data: frequencyResponses } = useAxiosGet(
@@ -20,7 +20,7 @@ export const ProductProvider = ({ children }) => {
       value={{
         products: typeof data === "object" ? data.products : [],
         loading: isLoading,
-        error: fetchError,
+        error: getError,
         categories: typeof categories === "object" ? categories.categories : [],
         brands: typeof brands === "object" ? brands.brands : [],
         frequencyResponses:
