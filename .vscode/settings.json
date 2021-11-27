@@ -3,6 +3,7 @@
         "haspopup",
         "hookform",
         "semibold",
+        "swipeable",
         "toastify"
     ]
 }

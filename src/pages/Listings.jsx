@@ -9,6 +9,8 @@ import {
 import ProductContext from "../context/ProductContext";
 import Card from "../components/Card";
 import { useForm } from "react-hook-form";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 function Listings() {
   //state
@@ -33,6 +35,26 @@ function Listings() {
     console.log(data);
   });
 
+  //loading
+  if (!products?.length) {
+    return (
+      <>
+        <section className="h-screen m-5 lg:pt-5">
+          <div className="flex justify-center items-center h-5/6">
+            <Loader
+              type="Puff"
+              color="#00BFFF"
+              height="100"
+              width="100"
+              className="pb-50"
+            />
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  //page
   return (
     <>
       {/* product listings page */}
@@ -137,26 +159,10 @@ function Listings() {
                 <div className="grid grid-cols-12">
                   <div className="col-span-12 md:col-span-6 listing-filter-options m-1 md:m-2 pr-2 pt-1 flex">
                     <h3 className="mx-2 font-sans font-medium whitespace-nowrap">
-                      Sort By
+                      Sort By:
                     </h3>
                     <select
-                      className="form-select border-0 w-full xl:w-10/12 appearance-none block bg-gray-200 text-gray-700 rounded-md md:py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                      name="sort"
-                      {...register("sort")}
-                    >
-                      <option value="" defaultValue>
-                        No Sort
-                      </option>
-                      <option value="price">Price</option>
-                      <option value="name">Name</option>
-                    </select>
-                  </div>
-                  <div className="col-span-12 md:col-span-6 listing-filter-options m-1 md:m-2 pr-2 flex">
-                    <h3 className="mx-2 font-sans font-medium whitespace-nowrap">
-                      Then By
-                    </h3>
-                    <select
-                      className="form-select border-0 w-full xl:w-10/12 appearance-none block bg-gray-200 text-gray-700 rounded-md md:py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                      className="form-select border-0 w-full xl:w-10/12 appearance-none block bg-gray-200 text-gray-700 rounded-md md:py-2 px-3 leading-tight focus:outline-none focus:bg-white"
                       name="sort"
                       {...register("sort")}
                     >

@@ -32,7 +32,7 @@ function Login() {
       }
     } else if (token) {
       setTimeout(() => {
-        navigate("/");
+        navigate(-1);
       }, 3000);
     }
   }, [postError, token, navigate]);
