@@ -6,14 +6,14 @@ import { apiBaseUrl } from "../api/link";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from "react-loader-spinner";
+import Loaders from "../components/Loaders";
 
 function Product() {
+  //state
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
-
+  //fetch data
   const { data, isLoading, getError } = useAxiosGet(
     `${apiBaseUrl}/products/${id}`
   );
@@ -38,6 +38,7 @@ function Product() {
     console.log(id, "addToCart");
   };
 
+  //buy now
   const byuNow = (id) => {
     toast.loading("Getting product details...", {
       type: "info",
@@ -56,21 +57,7 @@ function Product() {
 
   //loading
   if (isLoading) {
-    return (
-      <>
-        <section className="h-screen m-5 lg:pt-5">
-          <div className="flex justify-center items-center h-5/6">
-            <Loader
-              type="Puff"
-              color="#00BFFF"
-              height="100"
-              width="100"
-              className="pb-50"
-            />
-          </div>
-        </section>
-      </>
-    );
+    return <Loaders />;
   }
 
   //error

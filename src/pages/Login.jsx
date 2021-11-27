@@ -27,7 +27,7 @@ function Login() {
   useEffect(() => {
     //redirect
     if (postError) {
-      if (!postError.response.status === 401) {
+      if (!postError?.response?.status === 401) {
         navigate("/404");
       }
     } else if (token) {
@@ -52,7 +52,7 @@ function Login() {
       user && setToken(user.data);
     } catch (err) {
       const errorMsg =
-        err.response.status === 401
+        err?.response?.status === 401
           ? "Invalid email or password. Please try again."
           : "Login failed! Please try again";
       toast.update(signupToast, {

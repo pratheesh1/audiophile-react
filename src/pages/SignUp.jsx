@@ -28,7 +28,7 @@ function SignUp() {
   useEffect(() => {
     //redirect
     if (postError) {
-      if (!postError.response.status === 401) {
+      if (!postError?.response?.status === 401) {
         navigate("/404");
       }
     } else if (token) {
@@ -53,7 +53,7 @@ function SignUp() {
       user && setToken(user.data);
     } catch (err) {
       const errorMsg =
-        err.response.status === 401
+        err?.response?.status === 401
           ? "An account with this email already exists. Please login."
           : "Signup failed! Please try again";
       toast.update(signupToast, {
