@@ -988,8 +988,8 @@ select {
 .w-4\/5 {
 	width: 80%;
 }
-.w-10 {
-	width: 2.5rem;
+.w-14 {
+	width: 3.5rem;
 }
 .max-w-md {
 	max-width: 28rem;
@@ -1098,13 +1098,13 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 115, 22, var(--tw-bg-opacity));
 }
-.bg-gray-800 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(39, 39, 42, var(--tw-bg-opacity));
-}
 .bg-gray-200 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(228, 228, 231, var(--tw-bg-opacity));
+}
+.bg-gray-800 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(39, 39, 42, var(--tw-bg-opacity));
 }
 .bg-gray-300 {
 	--tw-bg-opacity: 1;

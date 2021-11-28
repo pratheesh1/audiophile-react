@@ -6,7 +6,7 @@ import UserContext from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../api/link";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function SignUp() {
   //state
@@ -47,8 +47,9 @@ function SignUp() {
       toast.update(signupToast, {
         render: "Signup successful! Redirecting...",
         type: "success",
-        isLoading: true,
+        isLoading: false,
         closeButton: true,
+        autoClose: 4000,
       });
       user && setToken(user.data);
     } catch (err) {
@@ -215,8 +216,6 @@ function SignUp() {
           </div>
         </div>
       </section>
-      {/* toast */}
-      <ToastContainer autoClose={8000} />
     </>
   );
 }

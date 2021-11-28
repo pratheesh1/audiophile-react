@@ -5,7 +5,7 @@ import UserContext from "../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { apiBaseUrl } from "../api/link";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { loginFormSchema } from "../validators/form";
 
 function Login() {
@@ -34,7 +34,7 @@ function Login() {
       setTimeout(() => {
         //FIXME:navigate to home if the user directly access this page, if not go to the last page
         navigate(-1);
-      }, 3000);
+      }, 2000);
     }
   }, [postError, token, navigate]);
 
@@ -47,8 +47,9 @@ function Login() {
       toast.update(signupToast, {
         render: "Login successful!",
         type: "success",
-        isLoading: true,
+        isLoading: false,
         closeButton: true,
+        autoClose: 4000,
       });
       user && setToken(user.data);
     } catch (err) {
@@ -155,8 +156,6 @@ function Login() {
           </div>
         </div>
       </section>
-      {/* toast */}
-      <ToastContainer autoClose={8000} />
     </>
   );
 }

@@ -11,10 +11,12 @@ import Card from "../components/Card";
 import { useForm } from "react-hook-form";
 import Loaders from "../components/Loaders";
 import { useNavigate } from "react-router-dom";
+import CartContext from "../context/CartContext";
 
 function Listings() {
   //state
   const { products, loading, error } = useContext(ProductContext);
+  const { addToCart } = useContext(CartContext);
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
 
@@ -191,7 +193,11 @@ function Listings() {
               {/* product cards */}
               {products &&
                 products.map((product) => (
-                  <Card key={product.id} product={product} />
+                  <Card
+                    key={product.id}
+                    product={product}
+                    addToCart={addToCart}
+                  />
                 ))}
             </div>
           </div>

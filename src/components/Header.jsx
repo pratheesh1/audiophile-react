@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   BrandImage,
   CartImage,
@@ -6,14 +6,59 @@ import {
   Hamburger,
   SearchIcon,
 } from "./Images";
-import UserContext from "../context/UserContext";
 import avatar from "../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
+import CartContext from "../context/CartContext";
+import UserContext from "../context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import { apiBaseUrl } from "../api/link";
+import axios from "axios";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  const { user, setIsLoggedIn } = useContext(UserContext);
+  const { user, setIsLoggedIn, token } = useContext(UserContext);
+  const { cart, cartUpdated } = useContext(CartContext);
+
+  //show toast when cart is updated
+  useEffect(() => {
+    if (cartUpdated) {
+      toast.success("Item added to cart!", {
+        autoClose: 4000,
+        pauseOnHover: true,
+        closeButton: true,
+      });
+    }
+  }, [cartUpdated]);
+
+  //logout function
+  const logOut = async () => {
+    const logoutToast = toast.loading("Logging you out...");
+    try {
+      await axios({
+        method: "post",
+        url: `${apiBaseUrl}/users/logout`,
+        data: {
+          refreshToken: token.refreshToken,
+        },
+      });
+      setIsLoggedIn(false);
+      toast.update(logoutToast, {
+        render: "Logout successful!",
+        type: "success",
+        isLoading: false,
+        autoClose: 4000,
+        closeButton: true,
+      });
+    } catch (error) {
+      toast.update(logoutToast, {
+        render: "Logout failed!",
+        type: "error",
+        isLoading: false,
+        closeButton: true,
+      });
+    }
+  };
 
   return (
     <>
@@ -141,7 +186,7 @@ function Header() {
                         <NavLink
                           to="/"
                           className="account-dropdown"
-                          onClick={() => setIsLoggedIn(false)}
+                          onClick={logOut}
                         >
                           Sign Out{" "}
                         </NavLink>
@@ -173,11 +218,13 @@ function Header() {
                 className="relative text-gray-700 hover:text-gray-600 pt-2 pr-5"
                 to="/cart"
               >
-                <CartImage count={user?.cart?.length ? user.cart.length : 0} />
+                <CartImage count={cart ? cart.length : 0} />
               </NavLink>
             </div>
           </div>
         </div>
+        {/* toast */}
+        <ToastContainer autoClose={8000} limit={10} />
       </nav>
     </>
   );

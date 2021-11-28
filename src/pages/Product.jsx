@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import useAxiosGet from "../hooks/useAxiosGet";
 import { apiBaseUrl } from "../api/link";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Loaders from "../components/Loaders";
+import CartContext from "../context/CartContext";
 
 function Product() {
   //state
@@ -17,6 +18,8 @@ function Product() {
   const { data, isLoading, getError } = useAxiosGet(
     `${apiBaseUrl}/products/${id}`
   );
+  const { addToCart } = useContext(CartContext);
+  const [formQuantity, setFormQuantity] = useState(1);
 
   //set product state
   useEffect(() => {
@@ -33,9 +36,8 @@ function Product() {
     });
 
   //add to cart
-  const addToCart = (id) => {
-    //TODO: add to cart
-    console.log(id, "addToCart");
+  const addItemToCart = (id, quantity) => {
+    addToCart({ productId: id, quantity: quantity ? quantity : null });
   };
 
   //buy now
@@ -44,11 +46,11 @@ function Product() {
       type: "info",
       autoClose: false,
       loading: true,
-      toastId: id,
     });
+    addItemToCart(id);
 
-    //TODO: remove timeout
     setTimeout(() => {
+      toast.dismiss();
       navigate("/checkout");
     }, 2000);
     console.log(id, "byuNow");
@@ -169,6 +171,18 @@ function Product() {
                                 </span>
                               </p>
                             )}
+                            {product?.stock >= 0 && (
+                              <p className="text-gray-800">
+                                <span className="text-gray-600">
+                                  Stock: &nbsp;
+                                  <span className="text-gray-700 font-bold text-base">
+                                    {product.stock
+                                      ? "In Stock"
+                                      : "Out of Stock"}
+                                  </span>
+                                </span>
+                              </p>
+                            )}
                             {/* tech specs */}
                             <h1 className="text-gray-800 mt-3">
                               <span className="text-gray-600 font-medium">
@@ -213,7 +227,12 @@ function Product() {
                       </div>
                       <div className="col-start-1">
                         <button
-                          className="py-4 px-3 mr-1 bg-orange-500 hover:bg-orange-600 hover:scale-110 text-white text-xs uppercase rounded whitespace-nowrap"
+                          className={`py-4 px-3 mr-1 text-xs uppercase rounded whitespace-nowrap ${
+                            product?.stock
+                              ? "bg-orange-500 hover:bg-orange-600 hover:scale-110 text-white"
+                              : "bg-gray-200 text-gray-800"
+                          }`}
+                          disabled={!product?.stock}
                           onClick={() => {
                             byuNow(product.id);
                           }}
@@ -225,13 +244,16 @@ function Product() {
                         <input
                           type="text"
                           placeholder="Quantity"
-                          defaultValue="1"
-                          className="w-10 rounded mr-2 border-2 border-gray-400 focus:outline-none focus:border-orange-500"
+                          value={formQuantity}
+                          onChange={(e) => {
+                            setFormQuantity(e.target.value);
+                          }}
+                          className="w-14 rounded mr-2 border-2 border-gray-400 focus:outline-none focus:border-orange-500"
                         />
                         <button
                           className=" px-2 py-2 mr-2 bg-gray-800 hover:scale-110 text-white text-xs uppercase rounded whitespace-nowrap"
                           onClick={() => {
-                            addToCart(product.id);
+                            addItemToCart(product.id, formQuantity);
                           }}
                         >
                           <i className="fas fa-cart-plus pr-1"></i> Add to Cart
@@ -244,8 +266,6 @@ function Product() {
             </div>
           </div>
         </div>
-        {/* toast */}
-        <ToastContainer autoClose={8000} limit={1} />
       </section>
     </>
   );

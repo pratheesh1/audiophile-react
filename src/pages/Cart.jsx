@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Loaders from "../components/Loaders";
 
 function Cart() {
@@ -26,8 +26,6 @@ function Cart() {
     return (
       <>
         <Loaders />
-        {/* toast */}
-        <ToastContainer autoClose={8000} />
       </>
     );
   }

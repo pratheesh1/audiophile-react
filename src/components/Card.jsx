@@ -1,29 +1,28 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-function Card({ product }) {
+function Card({ product, addToCart }) {
   const navigate = useNavigate();
   const getProduct = (id) => {
     navigate(`/product/${id}`);
   };
 
   //add to cart
-  const addToCart = (id) => {
-    //TODO: add to cart
-    console.log(id, "addToCart");
+  const addProduct = (id) => {
+    addToCart({ productId: id });
   };
 
   const byuNow = (id) => {
     toast.loading("Getting product details...", {
       type: "info",
-      autoClose: false,
+      autoClose: 5000,
       loading: true,
-      toastId: id,
     });
 
     //TODO: remove timeout
     setTimeout(() => {
+      toast.dismiss();
       navigate("/checkout");
     }, 2000);
     console.log(id, "byuNow");
@@ -78,7 +77,11 @@ function Card({ product }) {
             </div>
             <div className="flex justify-between">
               <button
-                className="py-2 px-2 mr-1 bg-orange-500 hover:bg-orange-600 hover:scale-110 text-white text-xs uppercase rounded whitespace-nowrap"
+                className={`py-2 px-2 mr-1 text-xs uppercase rounded whitespace-nowrap ${
+                  product?.stock
+                    ? "bg-orange-500 hover:bg-orange-600 hover:scale-110 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
                 onClick={() => {
                   byuNow(product.id);
                 }}
@@ -88,7 +91,7 @@ function Card({ product }) {
               <button
                 className=" px-2 py-2 mr-2 bg-gray-800 hover:scale-110 text-white text-xs uppercase rounded whitespace-nowrap"
                 onClick={() => {
-                  addToCart(product.id);
+                  addProduct(product.id);
                 }}
               >
                 <i className="fas fa-cart-plus pr-1"></i> Add to Cart
@@ -96,8 +99,6 @@ function Card({ product }) {
             </div>
           </div>
         </div>
-        {/* toast */}
-        <ToastContainer autoClose={8000} limit={1} />
       </div>
     )
   );
