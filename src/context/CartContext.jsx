@@ -4,6 +4,7 @@ import { apiBaseUrl } from "../api/link";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { v4 } from "uuid";
 
 const CartContext = createContext({});
 
@@ -65,6 +66,10 @@ export const CartProvider = ({ children }) => {
 
         if (data) {
           setCartUpdated(true);
+          toast.success("Item added to cart.", {
+            toastId: v4(),
+            autoClose: 3000,
+          });
         }
       } else {
         toast.info(
@@ -78,6 +83,57 @@ export const CartProvider = ({ children }) => {
         }, 2000);
       }
     } catch (error) {
+      toast.error("Something went wrong. Please try again.", {
+        toastId: "addToCart",
+        autoClose: 3000,
+      });
+      console.log(error);
+    }
+  };
+
+  /*
+   * @description: update cart item
+   *
+   * @param {Object} item
+   * @param {Number} item.productId - product id
+   * @param {Number} [item.productVariantId] - product variant id
+   * @param {Number} [item.quantity] - quantity
+   */
+  const updateCartItem = async (item) => {
+    try {
+      if (user && token) {
+        const data = await axios({
+          method: "post",
+          url: `${apiBaseUrl}/cart/update`,
+          headers: {
+            Authorization: `Bearer ${token.accessToken}`,
+          },
+          data: item,
+        });
+
+        if (data) {
+          setCartUpdated(true);
+          toast.success("Item quantity updated.", {
+            toastId: v4(),
+            autoClose: 3000,
+          });
+        }
+      } else {
+        toast.info(
+          "You must be logged in to update items in cart. Redirecting...",
+          {
+            autoClose: 3000,
+          }
+        );
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.", {
+        toastId: "updateCartItem",
+        autoClose: 3000,
+      });
       console.log(error);
     }
   };
@@ -91,16 +147,26 @@ export const CartProvider = ({ children }) => {
    */
   const removeFromCart = async (item) => {
     try {
-      const { data } = await axios.post(`${apiBaseUrl}/cart/remove`, {
-        body: item,
+      const { data } = await axios({
+        method: "delete",
+        url: `${apiBaseUrl}/cart/remove`,
         headers: {
           Authorization: `Bearer ${token.accessToken}`,
         },
+        data: item,
       });
       if (data) {
         setCartUpdated(true);
+        toast.info("Item removed to cart.", {
+          toastId: v4(),
+          autoClose: 3000,
+        });
       }
     } catch (error) {
+      toast.error("Something went wrong. Please try again.", {
+        toastId: "removeFromCart",
+        autoClose: 3000,
+      });
       console.log(error);
     }
   };
@@ -111,8 +177,8 @@ export const CartProvider = ({ children }) => {
         cart: cart,
         addToCart: addToCart,
         removeFromCart: removeFromCart,
-        cartUpdated: cartUpdated,
         setCart: setCart,
+        updateCartItem: updateCartItem,
       }}
     >
       {children}

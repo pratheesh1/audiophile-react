@@ -28,6 +28,17 @@ function Product() {
     }
   }, [data, getError, isLoading]);
 
+  ///check if form quantity is valid
+  useEffect(() => {
+    if (formQuantity < 1 || !Number.isInteger(formQuantity)) {
+      setFormQuantity(1);
+      toast.error("Invalid quantity!", {
+        toastId: "formQuantity",
+        autoClose: 3000,
+      });
+    }
+  }, [formQuantity]);
+
   //get images for carousel
   const images =
     product?.image &&
@@ -227,7 +238,7 @@ function Product() {
                       </div>
                       <div className="col-start-1">
                         <button
-                          className={`py-4 px-3 mr-1 text-xs uppercase rounded whitespace-nowrap ${
+                          className={`py-4 px-2 md:px-3 mr-1 text-xs uppercase rounded whitespace-nowrap ${
                             product?.stock
                               ? "bg-orange-500 hover:bg-orange-600 hover:scale-110 text-white"
                               : "bg-gray-200 text-gray-800"
@@ -240,7 +251,7 @@ function Product() {
                           <i className="fas fa-credit-card pr-1"></i> Buy Now
                         </button>
                       </div>
-                      <div className="col-start-4 flex">
+                      <div className="col-start-3 md:col-start-4 flex">
                         <input
                           type="text"
                           placeholder="Quantity"
@@ -248,7 +259,7 @@ function Product() {
                           onChange={(e) => {
                             setFormQuantity(e.target.value);
                           }}
-                          className="w-14 rounded mr-2 border-2 border-gray-400 focus:outline-none focus:border-orange-500"
+                          className="w-10 md:w-14 rounded ml-7 md:ml-0 mr-2 border-2 border-gray-400 focus:outline-none focus:border-orange-500"
                         />
                         <button
                           className=" px-2 py-2 mr-2 bg-gray-800 hover:scale-110 text-white text-xs uppercase rounded whitespace-nowrap"

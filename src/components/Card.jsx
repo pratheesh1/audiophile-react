@@ -16,7 +16,7 @@ function Card({ product, addToCart }) {
   const byuNow = (id) => {
     toast.loading("Getting product details...", {
       type: "info",
-      autoClose: 5000,
+      autoClose: 3000,
       loading: true,
     });
 
@@ -75,7 +75,7 @@ function Card({ product, addToCart }) {
                 </h1>
               </div>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between lg:pt-2">
               <button
                 className={`py-2 px-2 mr-1 text-xs uppercase rounded whitespace-nowrap ${
                   product?.stock

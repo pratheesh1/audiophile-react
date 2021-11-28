@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import {
   BrandImage,
   CartImage,
@@ -18,18 +18,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const { user, setIsLoggedIn, token } = useContext(UserContext);
-  const { cart, cartUpdated } = useContext(CartContext);
-
-  //show toast when cart is updated
-  useEffect(() => {
-    if (cartUpdated) {
-      toast.success("Item added to cart!", {
-        autoClose: 4000,
-        pauseOnHover: true,
-        closeButton: true,
-      });
-    }
-  }, [cartUpdated]);
+  const { cart } = useContext(CartContext);
 
   //logout function
   const logOut = async () => {
@@ -112,17 +101,17 @@ function Header() {
               </NavLink>
               <NavLink
                 className="nav-link"
-                to="/contact-us"
+                to="/orders"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                Contact
+                Orders
               </NavLink>
               <NavLink
                 className="nav-link"
-                to="/about"
+                to="/contact-us"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                About
+                Contact Us
               </NavLink>
 
               {/* search */}
