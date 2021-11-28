@@ -31,3 +31,9 @@
   @apply block text-red-500 text-xs italic;
 }
 /* -------------- End of SignUp.jsx -------------- */
+
+/* -------------- Cart.jsx -------------- */
+.address-form {
+  @apply shadow appearance-none border rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-xl focus:border focus:border-blue-400;
+}
+/* -------------- End of Cart.jsx -------------- */

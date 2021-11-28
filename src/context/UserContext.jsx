@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 import { apiBaseUrl } from "../api/link";
+import { toast } from "react-toastify";
 
 const UserContext = createContext({});
 
@@ -31,7 +32,10 @@ export const UserProvider = ({ children }) => {
           data && setUser(data.user);
           data && setIsLoggedIn(true);
         } catch (error) {
-          console.log(error);
+          toast.error("Error getting user data. Please login again.", {
+            toastId: "getUser",
+            autoClose: 4000,
+          });
         }
       };
       getUser();
@@ -54,7 +58,10 @@ export const UserProvider = ({ children }) => {
             );
             setToken(...token, accessToken);
           } catch (error) {
-            console.log(error);
+            toast.error("Error connecting to server. Please login again.", {
+              toastId: "refreshToken",
+              autoClose: 4000,
+            });
           }
         };
         refresh();

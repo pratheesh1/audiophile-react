@@ -19,14 +19,11 @@ function Card({ product, addToCart }) {
       autoClose: 3000,
       loading: true,
     });
-
-    //TODO: remove timeout
+    addProduct(id);
     setTimeout(() => {
       toast.dismiss();
-      navigate("/checkout");
+      navigate("/cart");
     }, 2000);
-    console.log(id, "byuNow");
-    //TODO: buy now
   };
 
   return (

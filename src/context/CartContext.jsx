@@ -87,7 +87,6 @@ export const CartProvider = ({ children }) => {
         toastId: "addToCart",
         autoClose: 3000,
       });
-      console.log(error);
     }
   };
 
@@ -134,7 +133,6 @@ export const CartProvider = ({ children }) => {
         toastId: "updateCartItem",
         autoClose: 3000,
       });
-      console.log(error);
     }
   };
 
@@ -167,7 +165,41 @@ export const CartProvider = ({ children }) => {
         toastId: "removeFromCart",
         autoClose: 3000,
       });
-      console.log(error);
+    }
+  };
+
+  /*
+   * @description: checkout cart
+   * @param {number} addressId - address id
+   * @param {string} [notes] - notes
+   *
+   * @returns {Object} - stripe payment intent
+   */
+  const checkoutCart = async (addressId, notes) => {
+    try {
+      const { data } = await axios.get(`${apiBaseUrl}/cart/checkout`, {
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+        params: {
+          addressId: addressId,
+          notes: notes,
+        },
+      });
+      if (data) {
+        console.log(data);
+        setCart([]);
+        setCartUpdated(true);
+        toast.success("Cart successfully checked out.", {
+          toastId: v4(),
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.", {
+        toastId: "checkoutCart",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -179,6 +211,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart: removeFromCart,
         setCart: setCart,
         updateCartItem: updateCartItem,
+        checkoutCart: checkoutCart,
       }}
     >
       {children}

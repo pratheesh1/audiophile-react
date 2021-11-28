@@ -30,7 +30,7 @@ function Product() {
 
   ///check if form quantity is valid
   useEffect(() => {
-    if (formQuantity < 1 || !Number.isInteger(formQuantity)) {
+    if (formQuantity < 0 || !formQuantity) {
       setFormQuantity(1);
       toast.error("Invalid quantity!", {
         toastId: "formQuantity",
@@ -62,10 +62,8 @@ function Product() {
 
     setTimeout(() => {
       toast.dismiss();
-      navigate("/checkout");
+      navigate("/cart");
     }, 2000);
-    console.log(id, "byuNow");
-    //TODO: buy now
   };
 
   //loading

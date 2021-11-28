@@ -48,3 +48,11 @@ export const signupFormSchema = yup.object().shape({
   firstName: yup.string().required("First name is required!"),
   lastName: yup.string().required("Last name is required!"),
 });
+
+export const addressFormSchema = yup.object().shape({
+  street: yup.string().required("Street/Address is required!"),
+  city: yup.string().required("City is required!"),
+  state: yup.string().required("State is required!"),
+  zip: yup.string().required("Zip is required!"),
+  countryId: yup.string().required("Country selection is required!"),
+});
