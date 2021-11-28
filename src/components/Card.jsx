@@ -61,7 +61,7 @@ function Card({ product }) {
                 getProduct(product.id);
               }}
             >
-              <h1 className="text-gray-900 font-bold text-2xl pb-5 whitespace-nowrap">
+              <h1 className="text-gray-900 font-bold text-lg pb-5 whitespace-nowrap">
                 {product.name}
               </h1>
               <p className="mt-2 text-gray-600 text-sm pb-2 line-clamp-3">

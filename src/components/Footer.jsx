@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { BrandImage, Facebook, Linkedin, Twitter } from "./Images";
 
 function Footer() {
@@ -12,38 +13,38 @@ function Footer() {
             <div className="w-full -mx-6 lg:w-2/5">
               <div className="px-6">
                 <div>
-                  <a
-                    href="/"
+                  <NavLink
+                    to="/"
                     className="text-xl font-bold text-gray-800 hover:text-gray-700"
                   >
                     <BrandImage />
-                  </a>
+                  </NavLink>
                 </div>
                 <p className="max-w-md mt-2 text-gray-500">
                   Your one stop shop for all things music.
                 </p>
                 <div className="flex mt-4 -mx-2">
-                  <a
-                    href="/"
+                  <NavLink
+                    to="/"
                     className="mx-2 text-gray-700 hover:text-gray-600"
                     aria-label="Linkedin"
                   >
                     <Linkedin />
-                  </a>
-                  <a
-                    href="/"
+                  </NavLink>
+                  <NavLink
+                    to="/"
                     className="mx-2 text-gray-700 hover:text-gray-600"
                     aria-label="Facebook"
                   >
                     <Facebook />
-                  </a>
-                  <a
-                    href="/"
+                  </NavLink>
+                  <NavLink
+                    to="/"
                     className="mx-2 text-gray-700 hover:text-gray-600"
                     aria-label="Twitter"
                   >
                     <Twitter />
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -53,39 +54,39 @@ function Footer() {
               <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
                 <div>
                   <h3 className="text-gray-700 uppercase">About</h3>
-                  <a href="/" className="footer-link">
+                  <NavLink to="/" className="footer-link">
                     Company
-                  </a>
-                  <a href="/" className="footer-link">
+                  </NavLink>
+                  <NavLink to="/" className="footer-link">
                     community
-                  </a>
-                  <a href="/" className="footer-link">
+                  </NavLink>
+                  <NavLink to="/" className="footer-link">
                     Careers
-                  </a>
+                  </NavLink>
                 </div>
                 <div>
                   <h3 className="text-gray-700 uppercase">Blog</h3>
-                  <a href="/" className="footer-link">
+                  <NavLink to="/" className="footer-link">
                     Tec
-                  </a>
-                  <a href="/" className="footer-link">
+                  </NavLink>
+                  <NavLink to="/" className="footer-link">
                     Music
-                  </a>
-                  <a href="/" className="footer-link">
+                  </NavLink>
+                  <NavLink to="/" className="footer-link">
                     Videos
-                  </a>
+                  </NavLink>
                 </div>
                 <div>
                   <h3 className="text-gray-700 uppercase">Products</h3>
-                  <a href="/" className="footer-link">
+                  <NavLink to="/" className="footer-link">
                     Headphones
-                  </a>
-                  <a href="/" className="footer-link">
+                  </NavLink>
+                  <NavLink to="/" className="footer-link">
                     Speakers
-                  </a>
-                  <a href="/" className="footer-link">
+                  </NavLink>
+                  <NavLink to="/" className="footer-link">
                     Accessories
-                  </a>
+                  </NavLink>
                 </div>
                 <div>
                   <h3 className="text-gray-700 uppercase">Contact</h3>

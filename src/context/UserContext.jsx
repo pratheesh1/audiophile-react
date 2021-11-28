@@ -11,7 +11,8 @@ export const UserProvider = ({ children }) => {
 
   //check if local storage has token
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const localToken = localStorage.getItem("token");
+    const token = JSON.parse(localToken);
     if (token) {
       setToken(token);
     }
@@ -36,7 +37,7 @@ export const UserProvider = ({ children }) => {
       getUser();
       //save to local storage
       if (!localStorage.getItem("token")) {
-        localStorage.setItem("token", token);
+        localStorage.token = JSON.stringify(token);
       }
     }
 
@@ -64,7 +65,7 @@ export const UserProvider = ({ children }) => {
     }
   }, [token]);
 
-  //logout and clear local storage
+  //logout and clear token
   useEffect(() => {
     //remove token from local storage when user logs out
     if (!isLoggedIn) {

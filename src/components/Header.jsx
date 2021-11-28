@@ -23,12 +23,12 @@ function Header() {
           <div className="flex justify-between items-center">
             {/* logo */}
             <div>
-              <a
+              <NavLink
                 className="text-gray-800 text-xl font-bold lg:text-2xl hover:text-gray-700"
-                href="/"
+                to="/"
               >
                 <BrandImage />
-              </a>
+              </NavLink>
             </div>
 
             {/* mobile menu */}
@@ -51,34 +51,34 @@ function Header() {
             }`}
           >
             <div className="flex flex-col lg:flex-row lg:mx-6">
-              <a
+              <NavLink
                 className="nav-link"
-                href="/"
+                to="/home"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 Home
-              </a>
-              <a
+              </NavLink>
+              <NavLink
                 className="nav-link"
-                href="/"
+                to="/"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 Shop
-              </a>
-              <a
+              </NavLink>
+              <NavLink
                 className="nav-link"
-                href="/"
+                to="/contact-us"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 Contact
-              </a>
-              <a
+              </NavLink>
+              <NavLink
                 className="nav-link"
-                href="/"
+                to="/about"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 About
-              </a>
+              </NavLink>
 
               {/* search */}
               <span className="relative my-3 mx-1 mb-5 lg:m-0 text-gray-600">

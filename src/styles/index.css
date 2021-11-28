@@ -819,11 +819,14 @@ select {
 .col-span-12 {
 	grid-column: span 12 / span 12;
 }
+.col-span-1 {
+	grid-column: span 1 / span 1;
+}
+.col-span-6 {
+	grid-column: span 6 / span 6;
+}
 .col-start-1 {
 	grid-column-start: 1;
-}
-.col-start-2 {
-	grid-column-start: 2;
 }
 .col-start-4 {
 	grid-column-start: 4;
@@ -946,6 +949,9 @@ select {
 .h-4\/6 {
 	height: 66.666667%;
 }
+.h-auto {
+	height: auto;
+}
 .h-1\/6 {
 	height: 16.666667%;
 }
@@ -981,6 +987,9 @@ select {
 }
 .w-4\/5 {
 	width: 80%;
+}
+.w-10 {
+	width: 2.5rem;
 }
 .max-w-md {
 	max-width: 28rem;
@@ -1132,6 +1141,9 @@ select {
 .fill-current {
 	fill: currentColor;
 }
+.object-contain {
+	object-fit: contain;
+}
 .object-cover {
 	object-fit: cover;
 }
@@ -1229,6 +1241,9 @@ select {
 .pb-8 {
 	padding-bottom: 2rem;
 }
+.pb-14 {
+	padding-bottom: 3.5rem;
+}
 .text-left {
 	text-align: left;
 }
@@ -1241,9 +1256,9 @@ select {
 .font-sans {
 	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-.text-2xl {
-	font-size: 1.5rem;
-	line-height: 2rem;
+.text-lg {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
 }
 .text-sm {
 	font-size: 0.875rem;
@@ -1257,9 +1272,17 @@ select {
 	font-size: 0.75rem;
 	line-height: 1rem;
 }
+.text-2xl {
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
 .text-3xl {
 	font-size: 1.875rem;
 	line-height: 2.25rem;
+}
+.text-base {
+	font-size: 1rem;
+	line-height: 1.5rem;
 }
 .font-bold {
 	font-weight: 700;
@@ -1269,6 +1292,12 @@ select {
 }
 .font-medium {
 	font-weight: 500;
+}
+.font-semibold {
+	font-weight: 600;
+}
+.font-light {
+	font-weight: 300;
 }
 .uppercase {
 	text-transform: uppercase;
@@ -1506,6 +1535,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(59, 130, 246, var(--tw-border-opacity));
 }
+.focus\:border-orange-500:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(249, 115, 22, var(--tw-border-opacity));
+}
 .focus\:bg-white:focus {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -1560,10 +1593,6 @@ select {
 
 	.md\:col-span-4 {
 		grid-column: span 4 / span 4;
-	}
-
-	.md\:col-span-10 {
-		grid-column: span 10 / span 10;
 	}
 
 	.md\:col-span-7 {
@@ -1682,6 +1711,10 @@ select {
 		width: 40%;
 	}
 
+	.lg\:w-1\/3 {
+		width: 33.333333%;
+	}
+
 	.lg\:flex-1 {
 		flex: 1 1 0%;
 	}
@@ -1708,6 +1741,10 @@ select {
 
 	.lg\:pl-20 {
 		padding-left: 5rem;
+	}
+
+	.lg\:pt-20 {
+		padding-top: 5rem;
 	}
 
 	.lg\:text-2xl {

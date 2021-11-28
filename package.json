@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "npm run watch:css && react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress open",
     "eject": "react-scripts eject",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/index.css && echo '\\033[1;92m>> tailwind css build completed!'",
     "watch": "chokidar './src/**/*.{js,jsx,ts,tsx}' -c 'npm run watch:css'",
@@ -50,9 +50,11 @@
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/line-clamp": "^0.2.2",
     "@tailwindcss/typography": "^0.4.1",
+    "@testing-library/cypress": "^8.0.2",
     "autoprefixer": "^10.2.6",
     "chokidar-cli": "^2.1.0",
     "concurrently": "^6.2.0",
+    "cyprus": "^2.0.2",
     "postcss-cli": "^8.3.1",
     "tailwindcss": "^2.2.4"
   }

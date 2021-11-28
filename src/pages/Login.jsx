@@ -32,6 +32,7 @@ function Login() {
       }
     } else if (token) {
       setTimeout(() => {
+        //FIXME:navigate to home if the user directly access this page, if not go to the last page
         navigate(-1);
       }, 3000);
     }

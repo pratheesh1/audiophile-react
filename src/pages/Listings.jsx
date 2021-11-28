@@ -147,7 +147,7 @@ function Listings() {
               className="absolute top-3 right-3 m-2 p-2 text-gray-700 text-xl cursor-pointer md:hidden"
               onClick={() => setOpenMenu(!openMenu)}
             >
-              <i class="fas fa-times"></i>{" "}
+              <i className="fas fa-times"></i>{" "}
             </div>
           </div>
 
