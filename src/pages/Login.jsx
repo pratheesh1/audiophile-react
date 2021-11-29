@@ -2,18 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import UserContext from "../context/UserContext";
-import { Link, useNavigate } from "react-router-dom";
-import { apiBaseUrl } from "../api/link";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import { loginFormSchema } from "../validators/form";
 
 function Login() {
   //state
-  const { token, setToken } = useContext(UserContext);
-  const [postError, setPostError] = useState(null);
+  const { login } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
 
   //form
   const {
@@ -25,49 +20,13 @@ function Login() {
   });
 
   useEffect(() => {
-    //redirect
-    if (postError) {
-      if (!postError?.response?.status === 401) {
-        navigate("/404");
-      }
-    } else if (token) {
-      setTimeout(() => {
-        //FIXME:navigate to home if the user directly access this page, if not go to the last page
-        navigate(-1);
-      }, 2000);
-    }
-  }, [postError, token, navigate]);
+    window.scrollTo(0, 0);
+  }, []);
 
   //submit
-  const onSubmit = async (formData) => {
+  const onSubmit = (formData) => {
     const { confirmPassword, ...userData } = formData;
-    const signupToast = toast.loading("Logging you in...");
-    try {
-      const user = await axios.post(`${apiBaseUrl}/users/login`, userData);
-      toast.update(signupToast, {
-        render: "Login successful!",
-        type: "success",
-        isLoading: false,
-        closeButton: true,
-        autoClose: 4000,
-      });
-      user && setToken(user.data);
-    } catch (err) {
-      const errorMsg =
-        err?.response?.status === 401
-          ? "Invalid email or password. Please try again."
-          : "Login failed! Please try again";
-      toast.update(signupToast, {
-        render: errorMsg,
-        type: "error",
-        isLoading: false,
-        closeButton: true,
-        autoClose: 5000,
-      });
-      setTimeout(() => {
-        err && setPostError(err);
-      }, 9000);
-    }
+    login(userData);
   };
 
   return (

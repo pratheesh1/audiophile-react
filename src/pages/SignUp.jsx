@@ -1,20 +1,27 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupFormSchema } from "../validators/form";
 import UserContext from "../context/UserContext";
-import { Link, useNavigate } from "react-router-dom";
-import { apiBaseUrl } from "../api/link";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   //state
-  const { token, setToken } = useContext(UserContext);
-  const [postError, setPostError] = useState(null);
+  const { signup, isLoggedIn } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   //form
   const {
@@ -25,48 +32,10 @@ function SignUp() {
     resolver: yupResolver(signupFormSchema),
   });
 
-  useEffect(() => {
-    //redirect
-    if (postError) {
-      if (!postError?.response?.status === 401) {
-        navigate("/404");
-      }
-    } else if (token) {
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
-    }
-  }, [postError, token, navigate]);
-
   //submit
-  const onSubmit = async (formData) => {
+  const onSubmit = (formData) => {
     const { confirmPassword, ...userData } = formData;
-    const signupToast = toast.loading("Signing you up...");
-    try {
-      const user = await axios.post(`${apiBaseUrl}/users/register`, userData);
-      toast.update(signupToast, {
-        render: "Signup successful! Redirecting...",
-        type: "success",
-        isLoading: false,
-        closeButton: true,
-        autoClose: 4000,
-      });
-      user && setToken(user.data);
-    } catch (err) {
-      const errorMsg =
-        err?.response?.status === 401
-          ? "An account with this email already exists. Please login."
-          : "Signup failed! Please try again";
-      toast.update(signupToast, {
-        render: errorMsg,
-        type: "error",
-        isLoading: false,
-        closeButton: true,
-      });
-      setTimeout(() => {
-        err && setPostError(err);
-      }, 9000);
-    }
+    signup(userData);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,17 +7,18 @@ import CartItem from "../components/CartItem";
 import CartContext from "../context/CartContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { apiBaseUrl } from "../api/link";
 import { addressFormSchema } from "../validators/form";
 
 function Cart() {
   //state
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const { cart } = useContext(CartContext);
-  const [countries, setCountries] = useState([]);
-  const [address, setAddress] = useState(null);
+  const { cart, checkoutCart, countries, address, setAddress, addNewAddress } =
+    useContext(CartContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   //check if user is logged in
   useEffect(() => {
@@ -31,21 +32,6 @@ function Cart() {
     }
   }, [navigate, user]);
 
-  //get countries
-  useEffect(() => {
-    axios
-      .get(`${apiBaseUrl}/address/countries`)
-      .then((res) => {
-        setCountries(res.data);
-      })
-      .catch((err) => {
-        toast.error("Error connecting to server. Please try again later.", {
-          autoClose: 5000,
-          closeButton: true,
-        });
-      });
-  }, []);
-
   //form
   const {
     register,
@@ -56,32 +42,8 @@ function Cart() {
   });
 
   //add new address
-  const onSubmit = async (data) => {
-    try {
-      const newAddress = await axios({
-        method: "post",
-        url: `${apiBaseUrl}/address/create`,
-        data: data,
-      });
-      setAddress(newAddress.data);
-    } catch (err) {
-      toast.error("Error connecting to server. Please try again later.", {
-        autoClose: 5000,
-        closeButton: true,
-      });
-    }
-  };
-
-  const checkoutCart = () => {
-    if (address) {
-      //TODO: checkout
-      console.log("success");
-    } else {
-      toast.error("Add a valid address before checkout.", {
-        autoClose: 5000,
-        closeButton: true,
-      });
-    }
+  const onSubmit = (data) => {
+    addNewAddress(data);
   };
 
   //total price
@@ -299,7 +261,9 @@ function Cart() {
                 <button
                   className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full rounded-md hover:scale-105"
                   type="submit"
-                  onClick={checkoutCart}
+                  onClick={() => {
+                    checkoutCart(address);
+                  }}
                 >
                   Checkout
                 </button>

@@ -5,15 +5,37 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
+import { loadStripe } from "@stripe/stripe-js";
 
 const CartContext = createContext({});
 
 export const CartProvider = ({ children }) => {
+  //state
   const [cart, setCart] = useState([]);
   const { user, token } = useContext(UserContext);
   const [cartUpdated, setCartUpdated] = useState(false);
   const navigate = useNavigate();
+  const [stripeSession, setStripeSession] = useState(null);
+  const [countries, setCountries] = useState([]);
+  const [address, setAddress] = useState(null);
 
+  //get countries
+  useEffect(() => {
+    axios
+      .get(`${apiBaseUrl}/address/countries`)
+      .then((res) => {
+        setCountries(res.data);
+      })
+      .catch((err) => {
+        toast.error("Error connecting to server. Please try again later.", {
+          autoClose: 5000,
+          closeButton: true,
+          toastId: "countries",
+        });
+      });
+  }, []);
+
+  //get and update cart
   useEffect(() => {
     //get cart function
     async function getCart() {
@@ -40,6 +62,33 @@ export const CartProvider = ({ children }) => {
       setCartUpdated(false);
     }
   }, [user, token, cartUpdated]);
+
+  //checkout with stripe if session id is set
+  useEffect(() => {
+    //checkout with stripe
+    async function checkout() {
+      const stripe = await loadStripe(stripeSession.publishableKey);
+      if (stripeSession) {
+        stripe.redirectToCheckout({
+          sessionId: stripeSession.sessionId,
+        });
+      }
+    }
+    if (stripeSession) {
+      try {
+        checkout();
+      } catch (error) {
+        toast.update("checkoutCart", {
+          render: "Something went wrong. Please try again.",
+          isLoading: false,
+          autoClose: 3000,
+          type: "error",
+        });
+      }
+    }
+  }, [stripeSession]);
+
+  /*********************** Helper Functions ***********************/
 
   /*
    * @description: add item to cart
@@ -175,34 +224,76 @@ export const CartProvider = ({ children }) => {
    *
    * @returns {Object} - stripe payment intent
    */
-  const checkoutCart = async (addressId, notes) => {
-    try {
-      const { data } = await axios.get(`${apiBaseUrl}/cart/checkout`, {
-        headers: {
-          Authorization: `Bearer ${token.accessToken}`,
-        },
-        params: {
-          addressId: addressId,
-          notes: notes,
-        },
+  //checkout with stripe
+  const checkoutCart = async (address, notes = null) => {
+    if (address) {
+      toast.loading("Checking out...", {
+        toastId: "checkoutCart",
+        autoClose: false,
+        type: "info",
       });
-      if (data) {
-        console.log(data);
-        setCart([]);
-        setCartUpdated(true);
-        toast.success("Cart successfully checked out.", {
-          toastId: v4(),
+      //get stripe session id
+      try {
+        const session = await axios({
+          method: "post",
+          url: `${apiBaseUrl}/checkout`,
+          headers: {
+            Authorization: `Bearer ${token.accessToken}`,
+          },
+          data: {
+            addressId: address.id,
+            notes: notes,
+          },
+        });
+        setStripeSession(session.data);
+      } catch (error) {
+        toast.update("checkoutCart", {
+          render: "Something went wrong. Please try again.",
           autoClose: 3000,
+          type: "error",
+          isLoading: false,
         });
       }
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.", {
+    } else {
+      toast.error("Please add shipping address.", {
         toastId: "checkoutCart",
         autoClose: 3000,
+        type: "error",
       });
     }
   };
 
+  /*
+   * @description: add new address
+   * @param {Object} address
+   * @param {string} address.street
+   * @param {string} address.city
+   * @param {string} address.state
+   * @param {string} address.zip
+   * @param {number} address.countryId
+   *
+   * @returns {Object} - new address
+   */
+  const addNewAddress = async (address) => {
+    try {
+      const newAddress = await axios({
+        method: "post",
+        url: `${apiBaseUrl}/address/create`,
+        data: address,
+      });
+      setAddress(newAddress.data);
+    } catch (err) {
+      toast.error("Error connecting to server. Please try again later.", {
+        autoClose: 5000,
+        closeButton: true,
+        toastId: "address-error",
+      });
+    }
+  };
+
+  /*********************** End of Helper Functions ***********************/
+
+  //return context
   return (
     <CartContext.Provider
       value={{
@@ -212,6 +303,10 @@ export const CartProvider = ({ children }) => {
         setCart: setCart,
         updateCartItem: updateCartItem,
         checkoutCart: checkoutCart,
+        countries: countries,
+        addNewAddress: addNewAddress,
+        address: address,
+        setAddress: setAddress,
       }}
     >
       {children}

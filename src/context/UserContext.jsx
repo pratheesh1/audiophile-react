@@ -2,13 +2,18 @@ import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 import { apiBaseUrl } from "../api/link";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
+  //state
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [postError, setPostError] = useState(null);
+  const navigate = useNavigate();
+  const [newUser, setNewUser] = useState(false);
 
   //check if local storage has token
   useEffect(() => {
@@ -82,6 +87,114 @@ export const UserProvider = ({ children }) => {
     }
   }, [isLoggedIn]);
 
+  //error handling
+  useEffect(() => {
+    //redirect
+    if (postError) {
+      if (!postError?.response?.status === 401) {
+        navigate("/404");
+      }
+    }
+  }, [postError, navigate]);
+
+  /*********************** Helper Functions ***********************/
+
+  //login error handling and redirect
+  const redirect = () => {
+    setTimeout(() => {
+      if (newUser) {
+        setNewUser(false);
+        navigate("/");
+      } else {
+        navigate(-1);
+      }
+    }, 1500);
+  };
+
+  /*
+   * @desc: signup
+   * @param: {object} userData
+   * @param: {string} userData.firstName
+   * @param: {string} userData.lastName
+   * @param: {string} userData.email
+   * @param: {string} userData.password
+   */
+
+  async function signup(userData) {
+    const signupToast = toast.loading("Signing you up...");
+    try {
+      const userToken = await axios.post(
+        `${apiBaseUrl}/users/register`,
+        userData
+      );
+      toast.update(signupToast, {
+        render: "Signup successful! Redirecting...",
+        type: "success",
+        isLoading: false,
+        closeButton: true,
+        autoClose: 3000,
+      });
+      userToken && setToken(userToken.data);
+      userToken && setNewUser(true);
+      redirect();
+    } catch (err) {
+      const errorMsg =
+        err?.response?.status === 401
+          ? "An account with this email already exists. Please login."
+          : "Signup failed! Please try again";
+      toast.update(signupToast, {
+        render: errorMsg,
+        type: "error",
+        isLoading: false,
+        closeButton: true,
+        closeOnClick: true,
+      });
+      setTimeout(() => {
+        err && setPostError(err);
+      }, 9000);
+    }
+  }
+
+  /*
+   * @desc: login
+   * @param: {object} userData
+   * @param: {string} userData.email
+   * @param: {string} userData.password
+   */
+  async function login(userData) {
+    const signupToast = toast.loading("Logging you in...");
+    try {
+      const userToken = await axios.post(`${apiBaseUrl}/users/login`, userData);
+      toast.update(signupToast, {
+        render: "Login successful!",
+        type: "success",
+        isLoading: false,
+        closeButton: true,
+        autoClose: 4000,
+      });
+      userToken && setToken(userToken.data);
+      userToken && setNewUser(false);
+      redirect();
+    } catch (err) {
+      const errorMsg =
+        err?.response?.status === 401
+          ? "Invalid email or password. Please try again."
+          : "Login failed! Please try again";
+      toast.update(signupToast, {
+        render: errorMsg,
+        type: "error",
+        isLoading: false,
+        closeButton: true,
+        autoClose: 5000,
+      });
+      setTimeout(() => {
+        err && setPostError(err);
+      }, 9000);
+    }
+  }
+
+  /*********************** End of Helper Functions ***********************/
+
   return (
     <UserContext.Provider
       value={{
@@ -89,7 +202,10 @@ export const UserProvider = ({ children }) => {
         setUser,
         token,
         setToken,
+        isLoggedIn,
         setIsLoggedIn,
+        signup,
+        login,
       }}
     >
       {children}

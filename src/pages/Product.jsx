@@ -21,6 +21,10 @@ function Product() {
   const { addToCart } = useContext(CartContext);
   const [formQuantity, setFormQuantity] = useState(1);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   //set product state
   useEffect(() => {
     if (!isLoading && !getError && data) {
@@ -79,7 +83,7 @@ function Product() {
   //page
   return (
     <>
-      <section className=" w-full min-h-screen mt-5 lg:pt-20">
+      <section className="min-h-screen mt-5 lg:pt-20 max-w-[100vw] overflow-hidden">
         <div className="grid grid-cols-12">
           <div className="col-span-12 md:col-start-2 md:col-span-9">
             <div className="grid grid-cols-12">
@@ -120,7 +124,7 @@ function Product() {
                   <div className="w-full flex flex-col items-start justify-center px-3">
                     <div className="h-5/6 min-h-[150px] w-full">
                       {/* name, description */}
-                      <h1 className="text-3xl font-bold text-gray-800">
+                      <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
                         {product?.name}
                       </h1>
                       <hr className="border-b-1 border-gray-400 my-3" />

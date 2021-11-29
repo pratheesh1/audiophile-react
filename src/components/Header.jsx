@@ -166,16 +166,27 @@ function Header() {
                           dropdownIsOpen ? "block" : "hidden"
                         }`}
                       >
-                        <NavLink to="/profile" className="account-dropdown">
+                        <NavLink
+                          to="/profile"
+                          className="account-dropdown"
+                          onClick={() => setIsOpen(!isOpen)}
+                        >
                           Your profile{" "}
                         </NavLink>
-                        <NavLink to="/help" className="account-dropdown">
+                        <NavLink
+                          to="/help"
+                          className="account-dropdown"
+                          onClick={() => setIsOpen(!isOpen)}
+                        >
                           Help{" "}
                         </NavLink>
                         <NavLink
                           to="/"
                           className="account-dropdown"
-                          onClick={logOut}
+                          onClick={() => {
+                            logOut();
+                            setIsOpen(!isOpen);
+                          }}
                         >
                           Sign Out{" "}
                         </NavLink>
@@ -206,6 +217,7 @@ function Header() {
               <NavLink
                 className="relative text-gray-700 hover:text-gray-600 pt-2 pr-5"
                 to="/cart"
+                onClick={() => setIsOpen(!isOpen)}
               >
                 <CartImage count={cart ? cart.length : 0} />
               </NavLink>

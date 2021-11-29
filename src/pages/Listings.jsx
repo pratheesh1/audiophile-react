@@ -19,9 +19,12 @@ function Listings() {
   const { addToCart } = useContext(CartContext);
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
-
   //form
   const { register, watch } = useForm();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   //useEffect to scroll to top of page when filter is applied
   useEffect(() => {
@@ -202,10 +205,6 @@ function Listings() {
             </div>
           </div>
         </div>
-
-        {/* featured products */}
-
-        {/* all products */}
 
         {/* absolute positioned filter button */}
         <div className="fixed bottom-0 right-0 m-2 md:hidden">

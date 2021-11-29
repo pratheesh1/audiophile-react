@@ -3,14 +3,14 @@ import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loaders from "../components/Loaders";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import { apiBaseUrl } from "../api/link";
 
-function Checkout() {
+function Orders() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   //check if user is logged in
   useEffect(() => {
@@ -22,7 +22,7 @@ function Checkout() {
         navigate("/login");
       }, 3000);
     }
-  }, [navigate, user]);
+  }, [user, navigate]);
 
   //loading
   if (!user) {
@@ -35,7 +35,7 @@ function Checkout() {
   }
 
   //return checkout page
-  return <div>This is a cart</div>;
+  return <></>;
 }
 
-export default Checkout;
+export default Orders;
