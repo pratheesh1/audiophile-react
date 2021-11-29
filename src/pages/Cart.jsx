@@ -11,9 +11,16 @@ import { addressFormSchema } from "../validators/form";
 
 function Cart() {
   //state
-  const { token, user, isLoading, outOfStock } = useContext(UserContext);
-  const { cart, checkoutCart, countries, address, setAddress, addNewAddress } =
-    useContext(CartContext);
+  const { token, user, isLoading } = useContext(UserContext);
+  const {
+    cart,
+    checkoutCart,
+    countries,
+    address,
+    setAddress,
+    addNewAddress,
+    outOfStock,
+  } = useContext(CartContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,12 +75,8 @@ function Cart() {
                   {cart?.length ? cart.length : 0} Items
                 </h2>
               </div>
-              <div className="w-full">
-                <h1
-                  className={`text-lg font-light text-red-500 ${
-                    !outOfStock ? "hidden" : ""
-                  }`}
-                >
+              <div className={!outOfStock ? "hidden" : "w-full"}>
+                <h1 className="text-base font-bold text-red-500 pt-1">
                   Some of the items in your cart are out of stock/do not have
                   enough stock. We have removed/updated the items in your cart.
                   Please review your cart and try again.
