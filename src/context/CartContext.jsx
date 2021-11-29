@@ -14,10 +14,11 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const { user, token } = useContext(UserContext);
   const [cartUpdated, setCartUpdated] = useState(false);
-  const navigate = useNavigate();
   const [stripeSession, setStripeSession] = useState(null);
   const [countries, setCountries] = useState([]);
   const [address, setAddress] = useState(null);
+  const [outOfStock, setOutOfStock] = useState(false);
+  const navigate = useNavigate();
 
   //get countries
   useEffect(() => {
@@ -250,12 +251,12 @@ export const CartProvider = ({ children }) => {
         //update cart if no stock
         if (error.response.status === 417) {
           toast.update("checkoutCart", {
-            render:
-              "Some of the items in your cart are out of stock/do not have enough stock. We have removed/updated the items in your cart. Please review your cart and try again.",
+            render: "Cart Updated. Please review your cart and try again.",
             isLoading: false,
             type: "error",
             closeButton: true,
           });
+          setOutOfStock(true);
           setCartUpdated(true);
         } else {
           toast.update("checkoutCart", {
@@ -319,6 +320,7 @@ export const CartProvider = ({ children }) => {
         addNewAddress: addNewAddress,
         address: address,
         setAddress: setAddress,
+        outOfStock: outOfStock,
       }}
     >
       {children}

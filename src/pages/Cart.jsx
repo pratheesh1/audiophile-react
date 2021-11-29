@@ -11,7 +11,7 @@ import { addressFormSchema } from "../validators/form";
 
 function Cart() {
   //state
-  const { token, user, isLoading } = useContext(UserContext);
+  const { token, user, isLoading, outOfStock } = useContext(UserContext);
   const { cart, checkoutCart, countries, address, setAddress, addNewAddress } =
     useContext(CartContext);
 
@@ -35,7 +35,6 @@ function Cart() {
 
   //redirect to login
   if (!token && !user && !isLoading) {
-    console.log(token, user, isLoading);
     toast.error("Please login to view your cart.", {
       toastId: "cart",
       autoClose: 4000,
@@ -68,6 +67,17 @@ function Cart() {
                 <h2 className="font-semibold text-xl md:text-2xl px-2 md:px-0">
                   {cart?.length ? cart.length : 0} Items
                 </h2>
+              </div>
+              <div className="w-full">
+                <h1
+                  className={`text-lg font-light text-red-500 ${
+                    !outOfStock ? "hidden" : ""
+                  }`}
+                >
+                  Some of the items in your cart are out of stock/do not have
+                  enough stock. We have removed/updated the items in your cart.
+                  Please review your cart and try again.
+                </h1>
               </div>
               <div className="flex mt-10 mb-5">
                 <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
