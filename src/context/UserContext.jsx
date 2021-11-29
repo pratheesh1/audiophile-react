@@ -10,17 +10,31 @@ export const UserProvider = ({ children }) => {
   //state
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const [postError, setPostError] = useState(null);
-  const navigate = useNavigate();
   const [newUser, setNewUser] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   //check if local storage has token
   useEffect(() => {
-    const localToken = localStorage.getItem("token");
-    const token = JSON.parse(localToken);
-    if (token) {
-      setToken(token);
+    const localToken = JSON.parse(localStorage.getItem("token"));
+    if (localToken) {
+      axios({
+        method: "post",
+        url: `${apiBaseUrl}/users/refresh`,
+        data: { refreshToken: localToken.refreshToken },
+      })
+        .then((res) => {
+          setToken({
+            refreshToken: localToken.refreshToken,
+            accessToken: res.data.accessToken,
+          });
+        })
+        .catch((err) => {
+          toast.error("Error connecting to server. Please login again.", {
+            toastId: "refreshToken",
+            autoClose: 4000,
+          });
+        });
     }
   }, []);
 
@@ -35,6 +49,7 @@ export const UserProvider = ({ children }) => {
             },
           });
           data && setUser(data.user);
+          data && setIsLoading(false);
         } catch (error) {
           toast.error("Error getting user data. Please login again.", {
             toastId: "getUser",
@@ -43,14 +58,7 @@ export const UserProvider = ({ children }) => {
         }
       };
       getUser();
-      //save to local storage
-      if (!localStorage.getItem("token")) {
-        localStorage.setItem("token", JSON.stringify(token));
-      }
     }
-
-    setIsLoading(false);
-
     //refresh token every 50 minutes
     if (token) {
       const refreshToken = setInterval(() => {
@@ -72,21 +80,10 @@ export const UserProvider = ({ children }) => {
         };
         refresh();
       }, 1000 * 60 * 50);
-
       //cleanup - clear interval when component unmounts
       return () => clearInterval(refreshToken);
     }
   }, [token]);
-
-  //error handling
-  useEffect(() => {
-    //redirect
-    if (postError) {
-      if (!postError?.response?.status === 401) {
-        navigate("/404");
-      }
-    }
-  }, [postError, navigate]);
 
   /*********************** Helper Functions ***********************/
 
@@ -127,6 +124,8 @@ export const UserProvider = ({ children }) => {
       });
       userToken && setToken(userToken.data);
       userToken && setNewUser(true);
+      userToken &&
+        localStorage.setItem("token", JSON.stringify(userToken.data));
       setIsLoading(false);
       redirect();
     } catch (err) {
@@ -141,9 +140,6 @@ export const UserProvider = ({ children }) => {
         closeButton: true,
         closeOnClick: true,
       });
-      setTimeout(() => {
-        err && setPostError(err);
-      }, 9000);
     }
   }
 
@@ -166,6 +162,8 @@ export const UserProvider = ({ children }) => {
       });
       userToken && setToken(userToken.data);
       userToken && setNewUser(false);
+      userToken &&
+        localStorage.setItem("token", JSON.stringify(userToken.data));
       setIsLoading(false);
       redirect();
     } catch (err) {
@@ -180,9 +178,6 @@ export const UserProvider = ({ children }) => {
         closeButton: true,
         autoClose: 5000,
       });
-      setTimeout(() => {
-        err && setPostError(err);
-      }, 9000);
     }
   }
 

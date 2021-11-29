@@ -35,6 +35,7 @@ function Cart() {
 
   //redirect to login
   if (!token && !user && !isLoading) {
+    console.log(token, user, isLoading);
     toast.error("Please login to view your cart.", {
       toastId: "cart",
       autoClose: 4000,

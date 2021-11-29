@@ -247,12 +247,24 @@ export const CartProvider = ({ children }) => {
         });
         setStripeSession(session.data);
       } catch (error) {
-        toast.update("checkoutCart", {
-          render: "Something went wrong. Please try again.",
-          autoClose: 3000,
-          type: "error",
-          isLoading: false,
-        });
+        //update cart if no stock
+        if (error.response.status === 417) {
+          toast.update("checkoutCart", {
+            render:
+              "Some of the items in your cart are out of stock/do not have enough stock. We have removed/updated the items in your cart. Please review your cart and try again.",
+            isLoading: false,
+            type: "error",
+            closeButton: true,
+          });
+          setCartUpdated(true);
+        } else {
+          toast.update("checkoutCart", {
+            render: "Something went wrong. Please try again.",
+            autoClose: 3000,
+            type: "error",
+            isLoading: false,
+          });
+        }
       }
     } else {
       toast.error("Please add shipping address.", {
