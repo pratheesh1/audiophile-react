@@ -10,44 +10,13 @@ import avatar from "../assets/images/avatar.png";
 import { NavLink } from "react-router-dom";
 import CartContext from "../context/CartContext";
 import UserContext from "../context/UserContext";
-import { ToastContainer, toast } from "react-toastify";
-import { apiBaseUrl } from "../api/link";
-import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  const { user, setIsLoggedIn, token } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   const { cart } = useContext(CartContext);
-
-  //logout function
-  const logOut = async () => {
-    const logoutToast = toast.loading("Logging you out...");
-    try {
-      await axios({
-        method: "post",
-        url: `${apiBaseUrl}/users/logout`,
-        data: {
-          refreshToken: token.refreshToken,
-        },
-      });
-      setIsLoggedIn(false);
-      toast.update(logoutToast, {
-        render: "Logout successful!",
-        type: "success",
-        isLoading: false,
-        autoClose: 4000,
-        closeButton: true,
-      });
-    } catch (error) {
-      toast.update(logoutToast, {
-        render: "Logout failed!",
-        type: "error",
-        isLoading: false,
-        closeButton: true,
-      });
-    }
-  };
 
   return (
     <>
@@ -184,7 +153,7 @@ function Header() {
                           to="/"
                           className="account-dropdown"
                           onClick={() => {
-                            logOut();
+                            logout();
                             setIsOpen(!isOpen);
                           }}
                         >

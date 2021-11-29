@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import { ProductProvider } from "./context/ProductContext";
 import { UserProvider } from "./context/UserContext";
@@ -10,6 +10,9 @@ import Listings from "./pages/Listings";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
 import SignUp from "./pages/SignUp";
+import Page404 from "./pages/Page404";
+import Home from "./pages/Home";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -19,16 +22,16 @@ function App() {
           <Header />
           <ProductProvider>
             <Routes>
-              <Route path="/cart" element={<Cart />} />
               <Route path="/" element={<Listings />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/product/:id" element={<Product />} />
-              <Route path="/orders" element={<Orders />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<SignUp />} />
-              <Route
-                path="/404"
-                element={<div className="h-screen">404</div>}
-              />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/404" element={<Page404 />} />
+              <Route path="*" element={<Navigate to="/404" />} />
             </Routes>
           </ProductProvider>
         </CartProvider>

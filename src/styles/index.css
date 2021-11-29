@@ -938,9 +938,6 @@ select {
 .hidden {
 	display: none;
 }
-.h-screen {
-	height: 100vh;
-}
 .h-5\/6 {
 	height: 83.333333%;
 }
@@ -967,6 +964,9 @@ select {
 }
 .h-4 {
 	height: 1rem;
+}
+.h-screen {
+	height: 100vh;
 }
 .h-4\/6 {
 	height: 66.666667%;

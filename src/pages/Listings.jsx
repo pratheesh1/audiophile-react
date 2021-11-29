@@ -30,15 +30,18 @@ function Listings() {
   useEffect(() => {
     !openMenu && window.scrollTo(0, 0);
     if (openMenu) {
-      document.getElementById("menu-container").classList.toggle("hidden");
-      document.getElementById("main-container").classList.toggle("hidden");
+      document.getElementById("menu-container").classList.remove("hidden");
+      document.getElementById("main-container").classList.add("hidden");
     }
-    //FIXME: component only affected after 2 rounds of state change
-    console.log(openMenu, "changes");
-  }, [openMenu, products]);
+    if (!openMenu) {
+      document.getElementById("menu-container").classList.add("hidden");
+      document.getElementById("main-container").classList.remove("hidden");
+    }
+  }, [openMenu]);
 
   //form submit
   watch((data) => {
+    //TODO: search
     console.log(data);
   });
 
@@ -46,13 +49,11 @@ function Listings() {
   if (error) {
     navigate("/404");
   }
-  //loading
-  if (loading) {
-    return <Loaders />;
-  }
 
   //page
-  return (
+  return loading ? (
+    <Loaders />
+  ) : (
     <>
       {/* product listings page */}
       <section className="bg-gray-100 w-full overflow-hidden min-h-screen relative">
@@ -216,6 +217,7 @@ function Listings() {
             <i className="fas fa-filter"></i>
           </button>
         </div>
+        <span className="hidden md:block"></span>
       </section>
     </>
   );

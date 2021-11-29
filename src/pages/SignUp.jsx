@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   //state
-  const { signup, isLoggedIn } = useContext(UserContext);
+  const { signup, user } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ function SignUp() {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (user) {
       navigate("/");
     }
-  }, [isLoggedIn, navigate]);
+  }, [user, navigate]);
 
   //form
   const {

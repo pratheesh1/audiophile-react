@@ -10,10 +10,10 @@ export const UserProvider = ({ children }) => {
   //state
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [postError, setPostError] = useState(null);
   const navigate = useNavigate();
   const [newUser, setNewUser] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   //check if local storage has token
   useEffect(() => {
@@ -35,7 +35,6 @@ export const UserProvider = ({ children }) => {
             },
           });
           data && setUser(data.user);
-          data && setIsLoggedIn(true);
         } catch (error) {
           toast.error("Error getting user data. Please login again.", {
             toastId: "getUser",
@@ -46,9 +45,11 @@ export const UserProvider = ({ children }) => {
       getUser();
       //save to local storage
       if (!localStorage.getItem("token")) {
-        localStorage.token = JSON.stringify(token);
+        localStorage.setItem("token", JSON.stringify(token));
       }
     }
+
+    setIsLoading(false);
 
     //refresh token every 50 minutes
     if (token) {
@@ -76,16 +77,6 @@ export const UserProvider = ({ children }) => {
       return () => clearInterval(refreshToken);
     }
   }, [token]);
-
-  //logout and clear token
-  useEffect(() => {
-    //remove token from local storage when user logs out
-    if (!isLoggedIn) {
-      localStorage.removeItem("token");
-      setToken(null);
-      setUser(null);
-    }
-  }, [isLoggedIn]);
 
   //error handling
   useEffect(() => {
@@ -136,6 +127,7 @@ export const UserProvider = ({ children }) => {
       });
       userToken && setToken(userToken.data);
       userToken && setNewUser(true);
+      setIsLoading(false);
       redirect();
     } catch (err) {
       const errorMsg =
@@ -174,6 +166,7 @@ export const UserProvider = ({ children }) => {
       });
       userToken && setToken(userToken.data);
       userToken && setNewUser(false);
+      setIsLoading(false);
       redirect();
     } catch (err) {
       const errorMsg =
@@ -193,19 +186,52 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  /*
+   * @desc: logout
+   */
+  async function logout() {
+    const logoutToast = toast.loading("Logging you out...");
+    try {
+      await axios({
+        method: "post",
+        url: `${apiBaseUrl}/users/logout`,
+        data: {
+          refreshToken: token.refreshToken,
+        },
+      });
+      localStorage.removeItem("token");
+      setToken(null);
+      setUser(null);
+      toast.update(logoutToast, {
+        render: "Logout successful!",
+        type: "success",
+        isLoading: false,
+        autoClose: 4000,
+        closeButton: true,
+      });
+    } catch (error) {
+      toast.update(logoutToast, {
+        render: "Logout failed!",
+        type: "error",
+        isLoading: false,
+        closeButton: true,
+      });
+    }
+  }
+
   /*********************** End of Helper Functions ***********************/
 
   return (
     <UserContext.Provider
       value={{
-        user,
-        setUser,
-        token,
-        setToken,
-        isLoggedIn,
-        setIsLoggedIn,
-        signup,
-        login,
+        user: user,
+        setUser: setUser,
+        token: token,
+        setToken: setToken,
+        signup: signup,
+        login: login,
+        logout: logout,
+        isLoading: isLoading,
       }}
     >
       {children}

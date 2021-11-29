@@ -1,41 +1,29 @@
 import React, { useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loaders from "../components/Loaders";
 
 function Orders() {
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { token, user, isLoading } = useContext(UserContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   //check if user is logged in
-  useEffect(() => {
-    if (!user) {
-      toast.info("You must be logged in to view this page. Redirecting...", {
-        autoClose: 5000,
-      });
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-    }
-  }, [user, navigate]);
-
-  //loading
-  if (!user) {
-    return (
-      <>
-        <Loaders />
-        {/* toast */}
-      </>
-    );
+  if (!token && !user && !isLoading) {
+    toast.error("You must be logged in to view this page.", {
+      autoClose: 4000,
+      toastId: "login",
+    });
+    return <Navigate to="/login" />;
   }
 
   //return checkout page
-  return <></>;
+
+  //return cart
+  return isLoading ? <Loaders /> : <></>;
 }
 
 export default Orders;

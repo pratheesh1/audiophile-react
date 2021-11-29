@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loaders from "../components/Loaders";
 import CartItem from "../components/CartItem";
@@ -11,26 +11,13 @@ import { addressFormSchema } from "../validators/form";
 
 function Cart() {
   //state
-  const { user } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { token, user, isLoading } = useContext(UserContext);
   const { cart, checkoutCart, countries, address, setAddress, addNewAddress } =
     useContext(CartContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  //check if user is logged in
-  useEffect(() => {
-    if (!user) {
-      toast.info("You must be logged in to view cart. Redirecting...", {
-        autoClose: 5000,
-      });
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-    }
-  }, [navigate, user]);
 
   //form
   const {
@@ -46,6 +33,15 @@ function Cart() {
     addNewAddress(data);
   };
 
+  //redirect to login
+  if (!token && !user && !isLoading) {
+    toast.error("Please login to view your cart.", {
+      toastId: "cart",
+      autoClose: 4000,
+    });
+    return <Navigate to="/login" />;
+  }
+
   //total price
   let totalPrice = 0;
   if (cart && cart?.length > 0) {
@@ -54,17 +50,10 @@ function Cart() {
     }, 0);
   }
 
-  //loading
-  if (!user) {
-    return (
-      <>
-        <Loaders />
-      </>
-    );
-  }
-
   //return cart
-  return (
+  return isLoading ? (
+    <Loaders />
+  ) : (
     <>
       <section className="bg-gray-100 w-full overflow-hidden min-h-screen relative xl:pt-5">
         <div className="container mx-auto mt-10">
