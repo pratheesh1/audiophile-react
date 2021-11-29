@@ -23,7 +23,13 @@ function Orders() {
   //return checkout page
 
   //return cart
-  return isLoading ? <Loaders /> : <></>;
+  return isLoading ? (
+    <Loaders />
+  ) : (
+    <>
+      <div className="h-screen w-full">Orders</div>
+    </>
+  );
 }
 
 export default Orders;

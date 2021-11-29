@@ -197,6 +197,7 @@ export const UserProvider = ({ children }) => {
       localStorage.removeItem("token");
       setToken(null);
       setUser(null);
+      setIsLoading(false);
       toast.update(logoutToast, {
         render: "Logout successful!",
         type: "success",
