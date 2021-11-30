@@ -11,12 +11,20 @@ import { NavLink } from "react-router-dom";
 import CartContext from "../context/CartContext";
 import UserContext from "../context/UserContext";
 import { ToastContainer } from "react-toastify";
+import ProductContext from "../context/ProductContext";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const { user, logout } = useContext(UserContext);
+  const { setParams, params } = useContext(ProductContext);
   const { cart } = useContext(CartContext);
+  const [search, setSearch] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setParams({ ...params, name: search, description: search });
+  };
 
   return (
     <>
@@ -85,18 +93,22 @@ function Header() {
 
               {/* search */}
               <span className="relative my-3 mx-1 mb-5 lg:m-0 text-gray-600">
-                <input
-                  className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none w-full"
-                  type="search"
-                  name="search"
-                  placeholder="Search"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-0 top-0 mt-3 mr-2"
-                >
-                  <SearchIcon />
-                </button>
+                <form onSubmit={handleSubmit}>
+                  <input
+                    className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none w-full"
+                    type="search"
+                    name="search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-0 top-0 mt-3 mr-2"
+                  >
+                    <SearchIcon />
+                  </button>
+                </form>
               </span>
             </div>
 

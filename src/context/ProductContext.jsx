@@ -1,11 +1,15 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import useAxiosGet from "../hooks/useAxiosGet";
 import { apiBaseUrl } from "../api/link";
 
 const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
-  const { data, getError, isLoading } = useAxiosGet(`${apiBaseUrl}/products`);
+  const [params, setParams] = useState({});
+  const { data, getError, isLoading } = useAxiosGet(
+    `${apiBaseUrl}/products`,
+    params
+  );
   const { data: categories } = useAxiosGet(`${apiBaseUrl}/products/categories`);
   const { data: brands } = useAxiosGet(`${apiBaseUrl}/products/brands`);
   const { data: frequencyResponses } = useAxiosGet(
@@ -31,6 +35,8 @@ export const ProductProvider = ({ children }) => {
           typeof impedanceRanges === "object"
             ? impedanceRanges.impedanceRanges
             : [],
+        params: params,
+        setParams: setParams,
       }}
     >
       {children}

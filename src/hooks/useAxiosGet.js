@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const useAxiosGet = (apiUrl) => {
+const useAxiosGet = (apiUrl, params = null) => {
   const [data, setData] = useState([]);
   const [getError, setGetError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +16,7 @@ const useAxiosGet = (apiUrl) => {
       try {
         const response = await axios.get(url, {
           cancelToken: source.token,
+          params: params,
         });
         if (mounted.current) {
           setData(response.data);
@@ -36,7 +37,7 @@ const useAxiosGet = (apiUrl) => {
     };
 
     return cleanUp;
-  }, [apiUrl]);
+  }, [apiUrl, params]);
 
   return { data, getError, isLoading };
 };

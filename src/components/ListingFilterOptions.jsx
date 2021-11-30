@@ -1,39 +1,6 @@
 import React, { useContext } from "react";
 import ProductContext from "../context/ProductContext";
 
-export function PriceRangeFilter({ register }) {
-  const options = [
-    { min: 0, max: 100, label: "$0 - $100" },
-    { min: 100, max: 500, label: "$100 - $500" },
-    { min: 500, max: 1000, label: "$500 - $1000" },
-    // above 1000
-    { min: 1000, max: null, label: "Above $1000" },
-  ];
-
-  return (
-    <>
-      {options.map((option, i) => {
-        return (
-          <li key={i} className="pt-1">
-            <input
-              type="checkbox"
-              {...register("price-range")}
-              value={`options.min: ${option.min}, options.max: ${option.max}`}
-              className="form-checkbox focus:ring-indigo-400 focus:ring-opacity-25 border border-gray-300 rounded-sm transition duration-150 ease-in-out mx-2"
-            />
-            <label
-              htmlFor={`price-range-${i}`}
-              className="label-default text-gray-700"
-            >
-              {option.label}
-            </label>
-          </li>
-        );
-      })}
-    </>
-  );
-}
-
 export function CategoryFilter() {
   // shape - {id: id, name: name}
   const { categories } = useContext(ProductContext);

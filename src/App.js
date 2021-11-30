@@ -19,8 +19,8 @@ function App() {
     <>
       <UserProvider>
         <CartProvider>
-          <Header />
           <ProductProvider>
+            <Header />
             <Routes>
               <Route path="/" element={<Listings />} />
               <Route path="/home" element={<Home />} />
@@ -31,7 +31,7 @@ function App() {
               <Route path="/orders" element={<Orders />} />
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/404" element={<Page404 />} />
-              <Route path="*" element={<Navigate to="/404" />} />
+              {/* <Route path="*" element={<Navigate to="/404" />} /> */}
             </Routes>
           </ProductProvider>
         </CartProvider>

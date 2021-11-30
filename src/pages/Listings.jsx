@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import {
-  PriceRangeFilter,
   CategoryFilter,
   BrandFilter,
   FrequencyResponsesFilter,
@@ -10,17 +9,17 @@ import ProductContext from "../context/ProductContext";
 import Card from "../components/Card";
 import { useForm } from "react-hook-form";
 import Loaders from "../components/Loaders";
-import { useNavigate } from "react-router-dom";
 import CartContext from "../context/CartContext";
+import { toast } from "react-toastify";
+import * as yup from "yup";
 
 function Listings() {
   //state
-  const { products, loading, error } = useContext(ProductContext);
+  const { products, loading, params, setParams } = useContext(ProductContext);
   const { addToCart } = useContext(CartContext);
   const [openMenu, setOpenMenu] = useState(false);
-  const navigate = useNavigate();
   //form
-  const { register, watch } = useForm();
+  const { register, getValues, reset } = useForm();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,16 +38,23 @@ function Listings() {
     }
   }, [openMenu]);
 
-  //form submit
-  watch((data) => {
-    //TODO: search
-    console.log(data);
-  });
-
-  //error
-  if (error) {
-    navigate("/404");
-  }
+  //filter products min/max price
+  const filterProducts = () => {
+    const { cost_max, cost_min } = getValues();
+    try {
+      if (cost_max) {
+        yup.number().min(0).max(1000000).validateSync(cost_max);
+      }
+      if (cost_min) {
+        yup.number().min(0).max(1000000).validateSync(cost_min);
+      }
+      setParams({ ...params, ...getValues() });
+    } catch (error) {
+      toast.error("Please enter a valid price range", {
+        toastId: "filter-error",
+      });
+    }
+  };
 
   //page
   return loading ? (
@@ -66,13 +72,62 @@ function Listings() {
           >
             <div className="w-10/12 sm:w-5/6 md:w-auto h-full md:h-auto">
               <div className="grid grid-cols-12">
+                {/* reset filter button */}
+                <div className="col-span-12 col-start-1 lg:col-start-4 mt-2 ml-3">
+                  <button
+                    className="bg-green-300 hover:bg-green-400 text-gray-800 font-light py-2 px-4 rounded-full"
+                    onClick={() => {
+                      setParams({});
+                      reset({
+                        cost_min: "",
+                        cost_max: "",
+                        category: "",
+                        brand: [],
+                        bluetooth: "",
+                        frequencyResponseId: [],
+                        impedanceRangeId: [],
+                        sort: "",
+                      });
+                    }}
+                  >
+                    Reset Filters
+                  </button>
+                  <button
+                    className="ml-4 bg-blue-300 hover:bg-blue-400 text-gray-800 font-light py-2 px-4 rounded-full"
+                    onClick={() => {
+                      filterProducts();
+                    }}
+                  >
+                    Filter
+                  </button>
+                </div>
                 <div className="col-span-12 col-start-1 lg:col-start-4">
                   {/* price range */}
                   <div className="listing-filter-options m-2 pt-5 pr-2">
-                    <h3 className="mx-2 font-sans font-medium">Price Range</h3>
-                    <ul>
-                      <PriceRangeFilter register={register} />
-                    </ul>
+                    <h3 className="mx-2 mb-2 font-sans font-medium">
+                      Price Range
+                    </h3>
+                    {/* min and max price text inputs */}
+                    <label className="block mb-2">
+                      <span className="mx-2 font-mono text-sm">Min Price</span>
+                    </label>
+                    <input
+                      className="m-2 form-select w-full xl:w-10/12 appearance-none border border-gray-300 block bg-white text-gray-700 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                      type="text"
+                      placeholder="$0"
+                      name="minPrice"
+                      {...register("cost_min")}
+                    />
+                    <label className="block mb-2">
+                      <span className="mx-2 font-mono text-sm">Max Price</span>
+                    </label>
+                    <input
+                      className="m-2 form-select w-full xl:w-10/12 appearance-none border border-gray-300 block bg-white text-gray-700 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                      type="text"
+                      placeholder="$100"
+                      name="maxPrice"
+                      {...register("cost_max")}
+                    />
                   </div>
 
                   {/* category */}
@@ -123,9 +178,9 @@ function Listings() {
                     </h3>
                     <select
                       className="m-2 form-select border-0 w-full xl:w-10/12 rounded-md text-gray-700 py-2 leading-tight focus:outline-none"
-                      name="frequencyResponses"
+                      name="frequencyResponseId"
                       multiple
-                      {...register("frequencyResponses")}
+                      {...register("frequencyResponseId")}
                     >
                       <FrequencyResponsesFilter />
                     </select>
@@ -138,9 +193,9 @@ function Listings() {
                     </h3>
                     <select
                       className="m-2 form-select border-0 w-full xl:w-10/12 rounded-md text-gray-700 py-2 leading-tight focus:outline-none"
-                      name="impedanceRange"
+                      name="impedanceRangeId"
                       multiple
-                      {...register("impedanceRange")}
+                      {...register("impedanceRangeId")}
                     >
                       <ImpedanceRangeFilter />
                     </select>
@@ -178,7 +233,7 @@ function Listings() {
                       <option value="" defaultValue>
                         No Sort
                       </option>
-                      <option value="price">Price</option>
+                      <option value="baseCost">Price</option>
                       <option value="name">Name</option>
                     </select>
                   </div>
