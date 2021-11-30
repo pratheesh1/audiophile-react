@@ -11,7 +11,7 @@ import { addressFormSchema } from "../validators/form";
 
 function Cart() {
   //state
-  const { token, user, isLoading } = useContext(UserContext);
+  const { user, isLoading } = useContext(UserContext);
   const {
     cart,
     checkoutCart,

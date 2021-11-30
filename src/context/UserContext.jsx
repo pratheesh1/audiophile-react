@@ -43,7 +43,6 @@ export const UserProvider = ({ children }) => {
           });
         });
     }
-    setIsLoading(false);
   }, []);
 
   //if token is set, get user data
