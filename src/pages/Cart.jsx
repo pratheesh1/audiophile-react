@@ -41,7 +41,7 @@ function Cart() {
   };
 
   //redirect to login
-  if (!token && !user && !isLoading) {
+  if (!user && !isLoading) {
     toast.error("Please login to view your cart.", {
       toastId: "cart",
       autoClose: 4000,

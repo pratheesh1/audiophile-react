@@ -5,7 +5,7 @@ import useAxiosGet from "../hooks/useAxiosGet";
 const OrderContext = createContext({});
 
 export const OrderProvider = ({ children }) => {
-  const { data, getError, isLoading } = useAxiosGet(`${apiBaseUrl}/orders`);
+  let { data, getError, isLoading } = useAxiosGet(`${apiBaseUrl}/orders`);
 
   return (
     <OrderContext.Provider
