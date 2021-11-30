@@ -59,8 +59,8 @@ function Orders() {
 
   //redirect to login
   if (!user && !isLoading) {
-    toast.error("Please login to view your cart.", {
-      toastId: "cart",
+    toast.error("Please login to view your orders.", {
+      toastId: "orders",
       autoClose: 4000,
     });
     return <Navigate to="/login" />;
