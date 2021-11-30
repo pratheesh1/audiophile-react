@@ -227,52 +227,59 @@ export const CartProvider = ({ children }) => {
    */
   //checkout with stripe
   const checkoutCart = async (address, notes = null) => {
-    if (address) {
-      toast.loading("Checking out...", {
-        toastId: "checkoutCart",
-        autoClose: false,
-        type: "info",
-      });
-      //get stripe session id
-      try {
-        const session = await axios({
-          method: "post",
-          url: `${apiBaseUrl}/checkout`,
-          headers: {
-            Authorization: `Bearer ${token.accessToken}`,
-          },
-          data: {
-            addressId: address.id,
-            notes: notes,
-          },
-        });
-        setStripeSession(session.data);
-      } catch (error) {
-        //update cart if no stock
-        if (error.response.status === 417) {
-          toast.update("checkoutCart", {
-            render: "Cart Updated. Please review your cart and try again.",
-            isLoading: false,
-            type: "error",
-            closeButton: true,
-          });
-          setOutOfStock(true);
-          setCartUpdated(true);
-        } else {
-          toast.update("checkoutCart", {
-            render: "Something went wrong. Please try again.",
-            autoClose: 3000,
-            type: "error",
-            isLoading: false,
-          });
-        }
-      }
-    } else {
-      toast.error("Please add shipping address.", {
+    if (cart.length === 0) {
+      toast.error("Your cart is empty. Please add items to cart.", {
         toastId: "checkoutCart",
         autoClose: 3000,
-        type: "error",
       });
+    } else {
+      if (address) {
+        toast.loading("Checking out...", {
+          toastId: "checkoutCart",
+          autoClose: false,
+          type: "info",
+        });
+        //get stripe session id
+        try {
+          const session = await axios({
+            method: "post",
+            url: `${apiBaseUrl}/checkout`,
+            headers: {
+              Authorization: `Bearer ${token.accessToken}`,
+            },
+            data: {
+              addressId: address.id,
+              notes: notes,
+            },
+          });
+          setStripeSession(session.data);
+        } catch (error) {
+          //update cart if no stock
+          if (error.response.status === 417) {
+            toast.update("checkoutCart", {
+              render: "Cart Updated. Please review your cart and try again.",
+              isLoading: false,
+              type: "error",
+              closeButton: true,
+            });
+            setOutOfStock(true);
+            setCartUpdated(true);
+          } else {
+            toast.update("checkoutCart", {
+              render: "Something went wrong. Please try again.",
+              autoClose: 3000,
+              type: "error",
+              isLoading: false,
+            });
+          }
+        }
+      } else {
+        toast.error("Please add shipping address.", {
+          toastId: "checkoutCart",
+          autoClose: 3000,
+          type: "error",
+        });
+      }
     }
   };
 

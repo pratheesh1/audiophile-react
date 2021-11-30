@@ -148,18 +148,11 @@ function Header() {
                         }`}
                       >
                         <NavLink
-                          to="/profile"
+                          to="/orders"
                           className="account-dropdown"
                           onClick={() => setIsOpen(!isOpen)}
                         >
-                          Your profile{" "}
-                        </NavLink>
-                        <NavLink
-                          to="/help"
-                          className="account-dropdown"
-                          onClick={() => setIsOpen(!isOpen)}
-                        >
-                          Help{" "}
+                          Your Orders
                         </NavLink>
                         <NavLink
                           to="/"

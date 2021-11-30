@@ -13,6 +13,7 @@ import SignUp from "./pages/SignUp";
 import Page404 from "./pages/Page404";
 import Home from "./pages/Home";
 import ContactUs from "./pages/ContactUs";
+import { OrderProvider } from "./context/OrderContext";
 
 function App() {
   return (
@@ -21,18 +22,20 @@ function App() {
         <CartProvider>
           <ProductProvider>
             <Header />
-            <Routes>
-              <Route path="/" element={<Listings />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/product/:id" element={<Product />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<SignUp />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/404" element={<Page404 />} />
-              {/* <Route path="*" element={<Navigate to="/404" />} /> */}
-            </Routes>
+            <OrderProvider>
+              <Routes>
+                <Route path="/" element={<Listings />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/product/:id" element={<Product />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<SignUp />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/404" element={<Page404 />} />
+                {/* <Route path="*" element={<Navigate to="/404" />} /> */}
+              </Routes>
+            </OrderProvider>
           </ProductProvider>
         </CartProvider>
       </UserProvider>

@@ -17,6 +17,11 @@ const useAxiosGet = (apiUrl, params = null) => {
         const response = await axios.get(url, {
           cancelToken: source.token,
           params: params,
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("token")).accessToken
+            }`,
+          },
         });
         if (mounted.current) {
           setData(response.data);

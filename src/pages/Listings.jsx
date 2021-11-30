@@ -32,11 +32,11 @@ function Listings() {
       document.getElementById("menu-container").classList.remove("hidden");
       document.getElementById("main-container").classList.add("hidden");
     }
-    if (!openMenu) {
+    if (!openMenu && !loading) {
       document.getElementById("menu-container").classList.add("hidden");
       document.getElementById("main-container").classList.remove("hidden");
     }
-  }, [openMenu]);
+  }, [openMenu, loading]);
 
   //filter products min/max price
   const filterProducts = () => {
@@ -73,7 +73,7 @@ function Listings() {
             <div className="w-10/12 sm:w-5/6 md:w-auto h-full md:h-auto">
               <div className="grid grid-cols-12">
                 {/* reset filter button */}
-                <div className="col-span-12 col-start-1 lg:col-start-4 mt-2 ml-3">
+                <div className="col-span-12 col-start-1 lg:col-start-4 mt-2 ml-3 flex">
                   <button
                     className="bg-green-300 hover:bg-green-400 text-gray-800 font-light py-2 px-4 rounded-full"
                     onClick={() => {
@@ -263,7 +263,7 @@ function Listings() {
         </div>
 
         {/* absolute positioned filter button */}
-        <div className="fixed bottom-0 right-0 m-2 md:hidden">
+        <div className="fixed bottom-2 right-3 m-2 md:hidden">
           <button
             className="bg-gray-200 text-gray-700 font-bold py-2 px-3 rounded-full focus:outline-none focus:shadow-outline"
             type="button"

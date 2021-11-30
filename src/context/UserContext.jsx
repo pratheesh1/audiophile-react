@@ -28,6 +28,13 @@ export const UserProvider = ({ children }) => {
             refreshToken: localToken.refreshToken,
             accessToken: res.data.accessToken,
           });
+          localStorage.setItem(
+            "token",
+            JSON.stringify({
+              refreshToken: localToken.refreshToken,
+              accessToken: res.data.accessToken,
+            })
+          );
         })
         .catch((err) => {
           toast.error("Error connecting to server. Please login again.", {
