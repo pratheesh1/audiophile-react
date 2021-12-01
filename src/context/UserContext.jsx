@@ -42,6 +42,8 @@ export const UserProvider = ({ children }) => {
             autoClose: 4000,
           });
         });
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
