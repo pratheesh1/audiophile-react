@@ -45,7 +45,7 @@ function Orders() {
           })
           .then((res) => {
             setOrders(res.data);
-            orders.length && setCurrentOrder(orders[0]);
+            res.data.length && setCurrentOrder(res.data[0]);
           });
       } catch (error) {
         toast.error("Error loading orders", {
