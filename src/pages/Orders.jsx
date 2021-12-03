@@ -20,8 +20,8 @@ function Orders() {
   //useEffect to scroll to top of page when filter is applied
   useEffect(() => {
     !openMenu && window.scrollTo(0, 0);
-    const menuContainer = document.getElementById("menu-container");
-    const mainContainer = document.getElementById("main-container");
+    const menuContainer = document.getElementById("ordermenu-container");
+    const mainContainer = document.getElementById("order-container");
     if (openMenu) {
       menuContainer && menuContainer.classList.remove("hidden");
       mainContainer && mainContainer.classList.add("hidden");
@@ -95,6 +95,7 @@ function Orders() {
                   role="button"
                   onClick={() => {
                     setCurrentOrder(order);
+                    setOpenMenu(!openMenu);
                   }}
                   key={order?.id}
                   className="bg-blue-100 border-t border-b border-blue-200 text-gray-700 px-4 py-3 lg:pl-10"
