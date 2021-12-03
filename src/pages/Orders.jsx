@@ -20,8 +20,8 @@ function Orders() {
   //useEffect to scroll to top of page when filter is applied
   useEffect(() => {
     !openMenu && window.scrollTo(0, 0);
-    const menuContainer = document.getElementById(".menu-container");
-    const mainContainer = document.getElementById(".main-container");
+    const menuContainer = document.getElementById("menu-container");
+    const mainContainer = document.getElementById("main-container");
     if (openMenu) {
       menuContainer && menuContainer.classList.remove("hidden");
       mainContainer && mainContainer.classList.add("hidden");
