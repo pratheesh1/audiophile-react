@@ -95,7 +95,8 @@ function Orders() {
                   role="button"
                   onClick={() => {
                     setCurrentOrder(order);
-                    setOpenMenu(!openMenu);
+                    window.matchMedia("(max-width: 768px)").matches &&
+                      setOpenMenu(!openMenu);
                   }}
                   key={order?.id}
                   className="bg-blue-100 border-t border-b border-blue-200 text-gray-700 px-4 py-3 lg:pl-10"
