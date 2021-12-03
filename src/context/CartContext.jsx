@@ -91,7 +91,7 @@ export const CartProvider = ({ children }) => {
 
   /*********************** Helper Functions ***********************/
 
-  /*
+  /**
    * @description: add item to cart
    * @info: if no quantity is provided, cart quantity is incremented by 1
    *
@@ -140,7 +140,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  /*
+  /**
    * @description: update cart item
    *
    * @param {Object} item
@@ -186,7 +186,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  /*
+  /**
    * @description: remove item from cart
    *
    * @param {Object} item
@@ -218,7 +218,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  /*
+  /**
    * @description: checkout cart
    * @param {number} addressId - address id
    * @param {string} [notes] - notes
@@ -283,7 +283,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  /*
+  /**
    * @description: add new address
    * @param {Object} address
    * @param {string} address.street

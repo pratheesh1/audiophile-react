@@ -108,13 +108,13 @@ export const UserProvider = ({ children }) => {
     }, 1500);
   };
 
-  /*
-   * @desc: signup
-   * @param: {object} userData
-   * @param: {string} userData.firstName
-   * @param: {string} userData.lastName
-   * @param: {string} userData.email
-   * @param: {string} userData.password
+  /**
+   * @desc signup
+   * @param {object} userData
+   * @param {string} userData.firstName
+   * @param {string} userData.lastName
+   * @param {string} userData.email
+   * @param {string} userData.password
    */
 
   async function signup(userData) {
@@ -152,11 +152,11 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  /*
-   * @desc: login
-   * @param: {object} userData
-   * @param: {string} userData.email
-   * @param: {string} userData.password
+  /**
+   * @desc login
+   * @param {object} userData
+   * @param {string} userData.email
+   * @param {string} userData.password
    */
   async function login(userData) {
     const signupToast = toast.loading("Logging you in...");
@@ -190,8 +190,8 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  /*
-   * @desc: logout
+  /**
+   * @desc logout
    */
   async function logout() {
     const logoutToast = toast.loading("Logging you out...");

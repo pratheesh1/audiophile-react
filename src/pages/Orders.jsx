@@ -85,7 +85,7 @@ function Orders() {
             id="ordermenu-container"
             className="col-span-12 md:col-start-1 lg:col-start-1 md:col-span-3 md:pt-5 absolute md:relative bg-gray-300 md:bg-transparent w-full h-screen md:h-auto overflow-x-scroll hidden md:block shadow-md border"
           >
-            <div className="w-10/12 sm:w-5/6 md:w-auto h-full md:h-auto">
+            <div className="w-10/12 sm:w-5/6 md:w-auto h-full max-h-screen overflow-y-scroll md:h-auto">
               <h1 className="p-2 lg:pl-10 text-xl font-serif text-gray-800">
                 View All Orders
               </h1>
