@@ -73,14 +73,17 @@ export const UserProvider = ({ children }) => {
       const refreshToken = setInterval(() => {
         const refresh = async () => {
           try {
-            const { accessToken } = await axios.post(
-              `${apiBaseUrl}/users/refresh`,
-              {
-                refreshToken: token.refreshToken,
-              }
-            );
-            setToken(...token, accessToken);
+            const res = await axios({
+              method: "post",
+              url: `${apiBaseUrl}/users/refresh`,
+              data: { refreshToken: token.refreshToken },
+            });
+            setToken({
+              refreshToken: token.refreshToken,
+              accessToken: res.data.accessToken,
+            });
           } catch (error) {
+            console.log(error);
             toast.error("Error connecting to server. Please login again.", {
               toastId: "refreshToken",
               autoClose: 4000,
