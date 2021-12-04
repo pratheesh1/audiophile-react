@@ -795,14 +795,14 @@ select {
 .left-4 {
 	left: 1rem;
 }
-.top-3 {
-	top: 0.75rem;
+.bottom-2 {
+	bottom: 0.5rem;
 }
 .right-3 {
 	right: 0.75rem;
 }
-.bottom-2 {
-	bottom: 0.5rem;
+.top-3 {
+	top: 0.75rem;
 }
 .top-10 {
 	top: 2.5rem;
@@ -914,11 +914,11 @@ select {
 .mt-8 {
 	margin-top: 2rem;
 }
-.ml-3 {
-	margin-left: 0.75rem;
-}
 .ml-4 {
 	margin-left: 1rem;
+}
+.ml-3 {
+	margin-left: 0.75rem;
 }
 .mb-2 {
 	margin-bottom: 0.5rem;
@@ -1034,6 +1034,9 @@ select {
 .w-4 {
 	width: 1rem;
 }
+.w-screen {
+	width: 100vw;
+}
 .w-10\/12 {
 	width: 83.333333%;
 }
@@ -1106,6 +1109,9 @@ select {
 }
 .overflow-hidden {
 	overflow: hidden;
+}
+.overflow-x-auto {
+	overflow-x: auto;
 }
 .overflow-x-scroll {
 	overflow-x: scroll;
@@ -1246,6 +1252,9 @@ select {
 .p-1 {
 	padding: 0.25rem;
 }
+.p-5 {
+	padding: 1.25rem;
+}
 .py-2 {
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
@@ -1290,13 +1299,13 @@ select {
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 }
-.px-4 {
-	padding-left: 1rem;
-	padding-right: 1rem;
-}
 .px-3 {
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
+}
+.px-4 {
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 .px-1 {
 	padding-left: 0.25rem;
@@ -1340,6 +1349,9 @@ select {
 }
 .pt-20 {
 	padding-top: 5rem;
+}
+.pb-3 {
+	padding-bottom: 0.75rem;
 }
 .pt-5 {
 	padding-top: 1.25rem;
@@ -1700,6 +1712,10 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(55, 48, 163, var(--tw-text-opacity));
 }
+.hover\:text-gray-800:hover {
+	--tw-text-opacity: 1;
+	color: rgba(39, 39, 42, var(--tw-text-opacity));
+}
 .hover\:text-blue-800:hover {
 	--tw-text-opacity: 1;
 	color: rgba(30, 64, 175, var(--tw-text-opacity));
@@ -1752,6 +1768,10 @@ select {
 		grid-column: span 6 / span 6;
 	}
 
+	.md\:col-span-10 {
+		grid-column: span 10 / span 10;
+	}
+
 	.md\:col-span-3 {
 		grid-column: span 3 / span 3;
 	}
@@ -1776,12 +1796,12 @@ select {
 		grid-column: span 5 / span 5;
 	}
 
-	.md\:col-start-1 {
-		grid-column-start: 1;
-	}
-
 	.md\:col-start-2 {
 		grid-column-start: 2;
+	}
+
+	.md\:col-start-1 {
+		grid-column-start: 1;
 	}
 
 	.md\:col-start-4 {
@@ -1852,6 +1872,10 @@ select {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 
+	.md\:flex-row {
+		flex-direction: row;
+	}
+
 	.md\:bg-transparent {
 		background-color: transparent;
 	}
@@ -1883,6 +1907,10 @@ select {
 
 	.md\:pt-4 {
 		padding-top: 1rem;
+	}
+
+	.md\:pb-0 {
+		padding-bottom: 0px;
 	}
 
 	.md\:pt-5 {

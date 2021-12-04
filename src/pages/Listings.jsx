@@ -18,12 +18,18 @@ function Listings() {
   const { products, loading, params, setParams } = useContext(ProductContext);
   const { addToCart } = useContext(CartContext);
   const [openMenu, setOpenMenu] = useState(false);
+  const [sortBy, setSortBy] = useState("");
   //form
   const { register, getValues, reset } = useForm();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  //when the user changes the sort by option
+  useEffect(() => {
+    setParams({ ...params, sort: sortBy });
+  }, [sortBy]);
 
   //useEffect to scroll to top of page when filter is applied
   useEffect(() => {
@@ -90,6 +96,7 @@ function Listings() {
                         impedanceRangeId: [],
                         sort: "",
                       });
+                      setSortBy("");
                     }}
                   >
                     Reset Filters
@@ -230,7 +237,8 @@ function Listings() {
                     <select
                       className="form-select border-0 w-full xl:w-10/12 appearance-none block bg-gray-200 text-gray-700 rounded-md md:py-2 px-3 leading-tight focus:outline-none focus:bg-white"
                       name="sort"
-                      {...register("sort")}
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
                     >
                       <option value="" defaultValue>
                         No Sort
