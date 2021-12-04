@@ -11,6 +11,7 @@ module.exports = {
     backgroundImage: {
       login:
         "url('https://images.unsplash.com/photo-1535925191244-17536ca4f8b6')",
+      hero: "url('https://res.cloudinary.com/dvam3s15z/image/upload/v1638590647/ogr1hnypsdfeijdsqpv0.jpg')",
     },
   },
   variants: {

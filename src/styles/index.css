@@ -825,6 +825,9 @@ select {
 .col-span-9 {
 	grid-column: span 9 / span 9;
 }
+.col-span-2 {
+	grid-column: span 2 / span 2;
+}
 .col-span-1 {
 	grid-column: span 1 / span 1;
 }
@@ -914,11 +917,14 @@ select {
 .mt-8 {
 	margin-top: 2rem;
 }
-.ml-4 {
-	margin-left: 1rem;
+.ml-7 {
+	margin-left: 1.75rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
+}
+.ml-4 {
+	margin-left: 1rem;
 }
 .mb-2 {
 	margin-bottom: 0.5rem;
@@ -934,9 +940,6 @@ select {
 }
 .mt-5 {
 	margin-top: 1.25rem;
-}
-.ml-7 {
-	margin-left: 1.75rem;
 }
 .block {
 	display: block;
@@ -985,6 +988,9 @@ select {
 }
 .h-4\/6 {
 	height: 66.666667%;
+}
+.h-3\/4 {
+	height: 75%;
 }
 .h-auto {
 	height: auto;
@@ -1222,8 +1228,14 @@ select {
 .bg-login {
 	background-image: url('https://images.unsplash.com/photo-1535925191244-17536ca4f8b6');
 }
+.bg-hero {
+	background-image: url('https://res.cloudinary.com/dvam3s15z/image/upload/v1638590647/ogr1hnypsdfeijdsqpv0.jpg');
+}
 .bg-cover {
 	background-size: cover;
+}
+.bg-right {
+	background-position: right;
 }
 .bg-center {
 	background-position: center;
@@ -1299,6 +1311,10 @@ select {
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 }
+.px-5 {
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+}
 .px-3 {
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
@@ -1353,6 +1369,9 @@ select {
 .pb-3 {
 	padding-bottom: 0.75rem;
 }
+.pr-14 {
+	padding-right: 3.5rem;
+}
 .pt-5 {
 	padding-top: 1.25rem;
 }
@@ -1373,6 +1392,9 @@ select {
 }
 .text-center {
 	text-align: center;
+}
+.text-right {
+	text-align: right;
 }
 .align-baseline {
 	vertical-align: baseline;
@@ -1409,6 +1431,10 @@ select {
 .text-2xl {
 	font-size: 1.5rem;
 	line-height: 2rem;
+}
+.text-3xl {
+	font-size: 1.875rem;
+	line-height: 2.25rem;
 }
 .font-bold {
 	font-weight: 700;
@@ -1468,6 +1494,10 @@ select {
 .text-indigo-600 {
 	--tw-text-opacity: 1;
 	color: rgba(79, 70, 229, var(--tw-text-opacity));
+}
+.text-orange-500 {
+	--tw-text-opacity: 1;
+	color: rgba(249, 115, 22, var(--tw-text-opacity));
 }
 .text-blue-500 {
 	--tw-text-opacity: 1;
@@ -1940,6 +1970,16 @@ select {
 		line-height: 2rem;
 	}
 
+	.md\:text-5xl {
+		font-size: 3rem;
+		line-height: 1;
+	}
+
+	.md\:text-4xl {
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
+
 	.md\:text-3xl {
 		font-size: 1.875rem;
 		line-height: 2.25rem;
@@ -2054,6 +2094,10 @@ select {
 
 	.lg\:pl-5 {
 		padding-left: 1.25rem;
+	}
+
+	.lg\:pl-14 {
+		padding-left: 3.5rem;
 	}
 
 	.lg\:pl-20 {

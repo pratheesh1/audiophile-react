@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import Loaders from "../components/Loaders";
 import { useNavigate } from "react-router";
+import MainTypical from "../components/MainTypical";
 
 const Home = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -11,6 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setParams({});
   }, []);
 
   //useEffect to scroll to top of page when filter is applied
@@ -49,7 +51,7 @@ const Home = () => {
                     setOpenMenu(false);
                   }}
                 >
-                  <span className="ml-4 pb-3 md:pb-0 text-gray-600 hover:text-gray-800 hover:scale-110 whitespace-nowrap">
+                  <span className="ml-7 pb-3 md:pb-0 text-gray-600 hover:text-gray-800 hover:scale-110 whitespace-nowrap">
                     {category.name}
                   </span>
                 </button>
@@ -59,7 +61,38 @@ const Home = () => {
         </nav>
 
         {/* main page content */}
-        <div className="grid grid-cols-12">
+        {/* section 1 */}
+        <div className="h-screen">
+          <div
+            className="h-3/4 bg-hero bg-right bg-cover bg-no-repeat grid grid-cols-2"
+            role="button"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <div className="col-span-2 lg:col-span-1 h-full flex flex-col items-center justify-center p-5 lg:pl-14">
+              <div className="text-center text-white text-3xl md:text-5xl">
+                <h1 className="text-white text-left font-bold py-3">
+                  Welcome to Audiophile. Get lost in music.
+                </h1>
+                <h1 className="text-white text-left text-3xl md:text-4xl font-bold py-3">
+                  Buy{" "}
+                  <span className="text-orange-500">
+                    <MainTypical />
+                  </span>
+                </h1>
+              </div>
+              {/* shop now button */}
+              <div className="text-right w-full pr-14 pt-5">
+                <span className="bg-orange-500 hover:bg-orange-600 text-white text-2xl font-bold py-4 px-5 rounded">
+                  Shop Now
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* section 2 */}
+        <div className="grid grid-cols-12 h-screen">
           <div className="col-span-12 md:col-start-2 md:col-span-10 p-5">
             Hello
           </div>

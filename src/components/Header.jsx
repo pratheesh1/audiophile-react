@@ -7,7 +7,7 @@ import {
   SearchIcon,
 } from "./Images";
 import avatar from "../assets/images/avatar.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CartContext from "../context/CartContext";
 import UserContext from "../context/UserContext";
 import { ToastContainer } from "react-toastify";
@@ -20,10 +20,12 @@ function Header() {
   const { setParams, params } = useContext(ProductContext);
   const { cart } = useContext(CartContext);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setParams({ ...params, name: search, description: search });
+    navigate("/");
   };
 
   return (
