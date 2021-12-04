@@ -63,7 +63,7 @@ const ContactUs = () => {
         <div class="col-start-2 col-span-10 lg:col-start-6 lg:col-span-6 flex flex-col items-center justify-center w-full">
           <div class="px-6 py-4 mx-auto bg-white rounded-lg shadow-md">
             <div>
-              <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-center text-gray-800">
+              <h2 class="text-xl md:text-2xl lg:text-3xl font-light text-center text-gray-800 pt-3">
                 Get in touch with the Audiophile team!
               </h2>
               <form ref={form} onSubmit={sendEmail}>
