@@ -201,7 +201,7 @@ function Header() {
           </div>
         </div>
         {/* toast */}
-        <ToastContainer autoClose={8000} limit={10} />
+        <ToastContainer autoClose={8000} limit={10} closeOnClick={true} />
       </nav>
     </>
   );
