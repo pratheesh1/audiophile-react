@@ -3,11 +3,11 @@ import ProductContext from "../context/ProductContext";
 import Loaders from "../components/Loaders";
 import { useNavigate } from "react-router";
 import MainTypical from "../components/MainTypical";
+import Recommendations from "../components/Recommendations";
 
 const Home = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { categories, products, loading, setParams } =
-    useContext(ProductContext);
+  const { categories, loading, setParams } = useContext(ProductContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Home = () => {
       <section className="bg-gray-100 w-full overflow-hidden min-h-screen relative">
         {/* nav for categories */}
         <nav
-          className="bg-white shadow-md absolute md:relative w-screen hidden md:block overflow-x-auto"
+          className="bg-white shadow-md absolute md:relative w-screen hidden md:block overflow-x-auto border-t"
           id="nav-categories"
         >
           <div className="container mx-auto px-6 py-4">
@@ -47,7 +47,7 @@ const Home = () => {
                   className="flex items-center"
                   onClick={() => {
                     setParams({ category: category.id });
-                    navigate("/");
+                    navigate("/home");
                     setOpenMenu(false);
                   }}
                 >
@@ -62,12 +62,12 @@ const Home = () => {
 
         {/* main page content */}
         {/* section 1 */}
-        <div className="h-screen">
+        <div className="min-h-screen">
           <div
-            className="h-3/4 bg-hero bg-right bg-cover bg-no-repeat grid grid-cols-2"
+            className="h-[65vh] bg-hero bg-right bg-cover bg-no-repeat grid grid-cols-2"
             role="button"
             onClick={() => {
-              navigate("/");
+              navigate("/home");
             }}
           >
             <div className="col-span-2 lg:col-span-1 h-full flex flex-col items-center justify-center p-5 lg:pl-14">
@@ -83,18 +83,21 @@ const Home = () => {
                 </h1>
               </div>
               {/* shop now button */}
-              <div className="text-right w-full pr-14 pt-5">
+              <div className="text-right w-full pr-16 pt-5 hover:animate-bounce">
                 <span className="bg-orange-500 hover:bg-orange-600 text-white text-2xl font-bold py-4 px-5 rounded">
                   Shop Now
                 </span>
               </div>
             </div>
           </div>
+          <div className="h-2/6 py-10">
+            <Recommendations />
+          </div>
         </div>
         {/* section 2 */}
         <div className="grid grid-cols-12 h-screen">
-          <div className="col-span-12 md:col-start-2 md:col-span-10 p-5">
-            Hello
+          <div className="col-span-12 md:col-start-2 md:col-span-10 md:p-5 h-1/4">
+            Hellos
           </div>
         </div>
 

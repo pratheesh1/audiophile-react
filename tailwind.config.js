@@ -7,6 +7,16 @@ module.exports = {
   theme: {
     extend: {
       colors: { ...supportedColors },
+      keyframes: {
+        wiggle: {
+          "0%, 50%, 100%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(3deg)" },
+          "75%": { transform: "rotate(-3deg)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
     },
     backgroundImage: {
       login:

@@ -86,8 +86,8 @@ function Orders() {
             className="col-span-12 md:col-start-1 lg:col-start-1 md:col-span-3 md:pt-5 absolute md:relative bg-gray-300 md:bg-transparent w-full h-screen md:h-auto overflow-x-scroll hidden md:block shadow-md border"
           >
             <div className="w-10/12 sm:w-5/6 md:w-auto h-full max-h-screen overflow-y-scroll md:h-auto">
-              <h1 className="p-2 lg:pl-10 text-xl font-serif text-gray-800">
-                View All Orders
+              <h1 className="p-2 lg:pl-5 text-xl font-serif text-gray-800">
+                View Your Orders:
               </h1>
               {/* for each order */}
               {orders.map((order) => (
@@ -99,7 +99,7 @@ function Orders() {
                       setOpenMenu(!openMenu);
                   }}
                   key={order?.id}
-                  className="bg-blue-100 border-t border-b border-blue-200 text-gray-700 px-4 py-3 lg:pl-10"
+                  className="bg-blue-100 border-t border-b border-blue-200 text-gray-700 px-4 py-3 lg:pl-10 lg:ml-3"
                 >
                   <p className="font-serif">Order ID: &nbsp;{order?.id}</p>
                   <p className="font-light text-base">

@@ -104,7 +104,7 @@ export const UserProvider = ({ children }) => {
     setTimeout(() => {
       if (newUser) {
         setNewUser(false);
-        navigate("/");
+        navigate("/home");
       } else {
         navigate(-1);
       }

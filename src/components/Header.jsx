@@ -25,7 +25,7 @@ function Header() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setParams({ ...params, name: search, description: search });
-    navigate("/");
+    navigate("/home");
   };
 
   return (
@@ -66,14 +66,14 @@ function Header() {
             <div className="flex flex-col lg:flex-row lg:mx-6">
               <NavLink
                 className="nav-link"
-                to="/home"
+                to="/"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 Home
               </NavLink>
               <NavLink
                 className="nav-link"
-                to="/"
+                to="/home"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 Shop

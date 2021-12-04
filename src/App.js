@@ -24,8 +24,8 @@ function App() {
             <Header />
             <OrderProvider>
               <Routes>
-                <Route path="/" element={<Listings />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Listings />} />
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
