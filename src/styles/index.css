@@ -932,6 +932,9 @@ select {
 .mt-8 {
 	margin-top: 2rem;
 }
+.mb-2 {
+	margin-bottom: 0.5rem;
+}
 .ml-7 {
 	margin-left: 1.75rem;
 }
@@ -940,9 +943,6 @@ select {
 }
 .ml-4 {
 	margin-left: 1rem;
-}
-.mb-2 {
-	margin-bottom: 0.5rem;
 }
 .mb-14 {
 	margin-bottom: 3.5rem;
@@ -1009,6 +1009,12 @@ select {
 }
 .h-4\/6 {
 	height: 66.666667%;
+}
+.h-\[92vh\] {
+	height: 92vh;
+}
+.h-40 {
+	height: 10rem;
 }
 .h-\[65vh\] {
 	height: 65vh;
@@ -1282,6 +1288,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
 }
+.bg-gray-700 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(63, 63, 70, var(--tw-bg-opacity));
+}
 .bg-green-300 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(134, 239, 172, var(--tw-bg-opacity));
@@ -1401,6 +1411,10 @@ select {
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 }
+.px-4 {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
 .px-5 {
 	padding-left: 1.25rem;
 	padding-right: 1.25rem;
@@ -1408,10 +1422,6 @@ select {
 .px-3 {
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
-}
-.px-4 {
-	padding-left: 1rem;
-	padding-right: 1rem;
 }
 .px-1 {
 	padding-left: 0.25rem;
@@ -1625,6 +1635,14 @@ select {
 }
 .filter {
 	filter: var(--tw-filter);
+}
+.transition-colors {
+	transition-property: background-color, border-color, color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+}
+.duration-200 {
+	transition-duration: 200ms;
 }
 .line-clamp-3 {
 	overflow: hidden;
@@ -1843,6 +1861,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
 }
+.hover\:bg-gray-600:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(82, 82, 91, var(--tw-bg-opacity));
+}
 .hover\:bg-green-400:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(74, 222, 128, var(--tw-bg-opacity));
@@ -1891,6 +1913,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(249, 115, 22, var(--tw-border-opacity));
 }
+.focus\:bg-gray-600:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(82, 82, 91, var(--tw-bg-opacity));
+}
 .focus\:bg-white:focus {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -1902,6 +1928,11 @@ select {
 .focus\:ring:focus {
 	--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
 	--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+	box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.focus\:ring-1:focus {
+	--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+	--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
 	box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 .focus\:ring-indigo-400:focus {
@@ -1989,6 +2020,10 @@ select {
 
 	.md\:mr-7 {
 		margin-right: 1.75rem;
+	}
+
+	.md\:mt-0 {
+		margin-top: 0px;
 	}
 
 	.md\:mb-20 {
