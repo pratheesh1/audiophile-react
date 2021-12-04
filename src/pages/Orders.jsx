@@ -79,14 +79,14 @@ function Orders() {
   ) : (
     <>
       <section className="bg-gray-100 w-full overflow-hidden min-h-screen relative lg:p-10 xl:pl-16">
-        <div className="grid grid-cols-12 gap-4">
+        <div className="grid grid-cols-12 gap-4 md:pt-10 md:px-3">
           {/* Menu */}
           <div
             id="ordermenu-container"
-            className="col-span-12 md:col-start-1 lg:col-start-1 md:col-span-3 md:pt-5 absolute md:relative bg-gray-300 md:bg-transparent w-full h-screen md:h-auto overflow-x-scroll hidden md:block shadow-md border"
+            className="md:rounded-lg col-span-12 md:col-start-1 lg:col-start-1 md:col-span-3 md:pt-5 absolute md:relative bg-gray-300 md:bg-transparent w-full h-screen md:h-auto overflow-x-scroll hidden md:block shadow-md border"
           >
             <div className="w-10/12 sm:w-5/6 md:w-auto h-full max-h-screen overflow-y-scroll md:h-auto">
-              <h1 className="p-2 lg:pl-5 text-xl font-serif text-gray-800">
+              <h1 className="p-2 lg:pl-5 text-xl font-serif text-gray-800 bg-gray-200">
                 View Your Orders:
               </h1>
               {/* for each order */}
@@ -99,7 +99,7 @@ function Orders() {
                       setOpenMenu(!openMenu);
                   }}
                   key={order?.id}
-                  className="bg-blue-100 border-t border-b border-blue-200 text-gray-700 px-4 py-3 lg:pl-10 lg:ml-3"
+                  className="bg-blue-100 border-t border-b border-blue-200 text-gray-700 px-4 py-3 lg:pl-10"
                 >
                   <p className="font-serif">Order ID: &nbsp;{order?.id}</p>
                   <p className="font-light text-base">
@@ -121,7 +121,7 @@ function Orders() {
           {currentOrder ? (
             <div
               id="order-container"
-              className="w-full md:pt-10 col-span-12 md:col-span-9 2xl:col-span-8 border shadow-md"
+              className="w-full md:pt-10 col-span-12 md:col-span-9 2xl:col-span-8 border shadow-md md:rounded-lg"
             >
               <div className="w-full bg-gray-200">
                 <h1 className="text-xl font-serif text-gray-900 p-2 w-full border-b">
@@ -171,7 +171,7 @@ function Orders() {
               ))}
             </div>
           ) : (
-            <div className="w-full h-full md:pt-10 col-span-12 md:col-span-9 2xl:col-span-8 border shadow-md">
+            <div className="w-full h-full md:pt-10 col-span-12 md:col-span-9 2xl:col-span-8 border shadow-md md:rounded-lg">
               <div className="w-full h-full flex justify-center items-center">
                 <h1 className="text-xl font-serif text-gray-900 p-2">
                   If you have orders, select one to view details.
