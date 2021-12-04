@@ -58,7 +58,7 @@ function Footer() {
                     Company
                   </NavLink>
                   <NavLink to="/" className="footer-link">
-                    community
+                    Community
                   </NavLink>
                   <NavLink to="/" className="footer-link">
                     Careers
@@ -90,7 +90,7 @@ function Footer() {
                 </div>
                 <div>
                   <h3 className="text-gray-700 uppercase">Contact</h3>
-                  <span className="footer-link">+1 526 654 8965</span>
+                  <span className="footer-link">+65 98765432</span>
                   <span className="footer-link">john@gemail.com</span>
                 </div>
               </div>
