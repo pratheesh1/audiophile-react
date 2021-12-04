@@ -11,7 +11,7 @@ const Page404 = () => {
     <>
       <main
         aria-labelledby="404"
-        className="flex h-screen items-center justify-center bg-gray-100"
+        className="flex min-h-screen items-center justify-center bg-gray-100"
       >
         <div className="min-w-screen min-h-screen bg-white flex items-center p-5 lg:p-20 overflow-hidden relative">
           <div className="flex-1 min-h-full min-w-full rounded-3xl bg-gray-100 shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex items-center text-center md:text-left">
