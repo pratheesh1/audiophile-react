@@ -109,7 +109,7 @@ function Cart() {
                 </div>
               )}
 
-              <NavLink to="/">
+              <NavLink to="/home">
                 <span className="flex font-semibold text-indigo-600 hover:text-indigo-800 text-sm mt-10 hover:scale-105">
                   <i className="fas fa-arrow-left mt-1"></i> &nbsp; Continue
                   Shopping

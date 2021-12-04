@@ -13,7 +13,6 @@ const Recommendations = () => {
     products?.length > 7 ? products.slice(0, 7) : products;
   const { addToCart } = useContext(CartContext);
 
-  console.log(recommendations);
   const generateCards = () => {
     return recommendations.map((product) => (
       <span key={product.id} className="hover:animate-wiggle">
