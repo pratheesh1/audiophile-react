@@ -1,7 +1,4 @@
-// renders the login page
-describe("renders login page", () => {
-  it("renders login page", () => {
-    cy.visit("/login");
-    cy.contains("Login");
-  });
-});
+/// <reference types="Cypress" />
+
+import Chance from "chance";
+const chance = new Chance();
