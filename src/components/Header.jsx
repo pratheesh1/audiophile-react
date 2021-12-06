@@ -86,7 +86,7 @@ function Header() {
                 Orders
               </NavLink>
               <NavLink
-                className="nav-link"
+                className="nav-link whitespace-nowrap"
                 to="/contact-us"
                 onClick={() => setIsOpen(!isOpen)}
               >

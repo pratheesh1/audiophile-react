@@ -1993,14 +1993,6 @@ select {
 		right: 8rem;
 	}
 
-	.md\:order-1 {
-		order: 1;
-	}
-
-	.md\:order-2 {
-		order: 2;
-	}
-
 	.md\:col-span-6 {
 		grid-column: span 6 / span 6;
 	}
@@ -2009,20 +2001,20 @@ select {
 		grid-column: span 10 / span 10;
 	}
 
-	.md\:col-span-8 {
-		grid-column: span 8 / span 8;
-	}
-
-	.md\:col-span-4 {
-		grid-column: span 4 / span 4;
-	}
-
 	.md\:col-span-3 {
 		grid-column: span 3 / span 3;
 	}
 
 	.md\:col-span-9 {
 		grid-column: span 9 / span 9;
+	}
+
+	.md\:col-span-8 {
+		grid-column: span 8 / span 8;
+	}
+
+	.md\:col-span-4 {
+		grid-column: span 4 / span 4;
 	}
 
 	.md\:col-span-7 {
@@ -2232,12 +2224,25 @@ select {
 		line-height: 2.5rem;
 	}
 
+	.md\:text-xl {
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+
 	.md\:text-3xl {
 		font-size: 1.875rem;
 		line-height: 2.25rem;
 	}
 }
 @media (min-width: 1024px) {
+
+	.lg\:order-1 {
+		order: 1;
+	}
+
+	.lg\:order-2 {
+		order: 2;
+	}
 
 	.lg\:col-span-6 {
 		grid-column: span 6 / span 6;
@@ -2249,6 +2254,14 @@ select {
 
 	.lg\:col-span-11 {
 		grid-column: span 11 / span 11;
+	}
+
+	.lg\:col-span-8 {
+		grid-column: span 8 / span 8;
+	}
+
+	.lg\:col-span-4 {
+		grid-column: span 4 / span 4;
 	}
 
 	.lg\:col-start-6 {
@@ -2374,10 +2387,6 @@ select {
 
 	.lg\:pt-20 {
 		padding-top: 5rem;
-	}
-
-	.lg\:text-left {
-		text-align: left;
 	}
 
 	.lg\:text-2xl {

@@ -98,7 +98,7 @@ const Home = () => {
         {/* section 2 */}
         <div className="grid grid-cols-12 min-h-[50vh]">
           <div className="col-span-12 md:col-start-2 md:col-span-10 md:p-5 h-1/4 grid grid-cols-12">
-            <div className="col-span-12 md:col-span-8 md:p-5 h-full order-2 md:order-1">
+            <div className="col-span-12 lg:col-span-8 md:p-5 h-full order-2 lg:order-1">
               {/* carousel of brands */}
               <Brands
                 brands={brands}
@@ -106,14 +106,14 @@ const Home = () => {
                 navigate={navigate}
               />
             </div>
-            <div className="col-span-12 md:col-span-4 p-1 md:p-5 md:pl-10 h-full order-1 md:order-2">
+            <div className="col-span-12 lg:col-span-4 p-1 md:p-5 md:pl-10 h-full order-1 lg:order-2">
               {/* title section */}
               <div className="flex flex-col items-center justify-center h-full">
-                <h1 className="text-center lg:text-left text-3xl font-bold p-3 w-full">
+                <h1 className="text-center md:text-left text-3xl font-bold p-3 w-full">
                   Shop all your favorite brands.
                 </h1>
                 {/* catchphrase */}
-                <h1 className="text-center lg:text-left text-xl font-light p-3 w-full">
+                <h1 className="text-left text-base md:text-xl font-light p-3 w-full">
                   All your favorite brands in one place. Shop to your heart's
                   content and be rewarded as you go.
                 </h1>
