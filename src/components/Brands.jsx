@@ -37,7 +37,7 @@ const Brands = ({ brands, setParams, navigate }) => {
       {brands?.map(
         (brand) =>
           brand?.thumbnail && (
-            <>
+            <React.Fragment key={brand.id}>
               <div
                 className="h-[130px] w-[140px] my-5 mx-3"
                 role="button"
@@ -52,7 +52,7 @@ const Brands = ({ brands, setParams, navigate }) => {
                   alt={brand.brandName}
                 />
               </div>
-            </>
+            </React.Fragment>
           )
       )}
     </Slider>

@@ -1675,11 +1675,17 @@ select {
 .duration-200 {
 	transition-duration: 200ms;
 }
-.line-clamp-3 {
+.line-clamp-1 {
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 1;
+}
+.line-clamp-2 {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
 }
 
 /* -------------- Header.jsx -------------- */
@@ -2232,6 +2238,13 @@ select {
 	.md\:text-3xl {
 		font-size: 1.875rem;
 		line-height: 2.25rem;
+	}
+
+	.md\:line-clamp-2 {
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
 	}
 }
 @media (min-width: 1024px) {

@@ -41,7 +41,7 @@ function Card({ product, addToCart }) {
               <img
                 className="object-cover flex-shrink-0"
                 src={product.image[0].imageUrl}
-                alt="Sunset in the mountains"
+                alt={product.name}
               />
             </div>
           ) : (
@@ -57,10 +57,10 @@ function Card({ product, addToCart }) {
                 getProduct(product.id);
               }}
             >
-              <h1 className="text-gray-900 font-bold text-lg pb-5 whitespace-nowrap">
+              <h1 className="text-gray-900 font-bold text-lg pb-5 line-clamp-1 md:line-clamp-2">
                 {product.name}
               </h1>
-              <p className="mt-2 text-gray-600 text-sm pb-2 line-clamp-3">
+              <p className="mt-2 text-gray-600 text-sm pb-2 line-clamp-2">
                 {product.description}
               </p>
               <div className="flex justify-between mt-2">
