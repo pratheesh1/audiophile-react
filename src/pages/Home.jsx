@@ -4,10 +4,11 @@ import Loaders from "../components/Loaders";
 import { useNavigate } from "react-router";
 import MainTypical from "../components/MainTypical";
 import Recommendations from "../components/Recommendations";
+import Brands from "../components/Brands";
 
 const Home = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const { categories, loading, setParams } = useContext(ProductContext);
+  const { categories, loading, setParams, brands } = useContext(ProductContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,7 +85,7 @@ const Home = () => {
               </div>
               {/* shop now button */}
               <div className="text-right w-full pr-16 pt-5 hover:animate-bounce">
-                <span className="bg-orange-500 hover:bg-orange-600 text-white text-2xl font-bold py-4 px-5 rounded">
+                <span className="bg-orange-500 hover:bg-orange-600 text-white text-2xl font-bold py-3 md:py-4 px-5 rounded">
                   Shop Now
                 </span>
               </div>
@@ -95,12 +96,31 @@ const Home = () => {
           </div>
         </div>
         {/* section 2 */}
-        <div className="grid grid-cols-12 h-screen">
-          <div className="col-span-12 md:col-start-2 md:col-span-10 md:p-5 h-1/4">
-            Hellos
+        <div className="grid grid-cols-12 min-h-[50vh]">
+          <div className="col-span-12 md:col-start-2 md:col-span-10 md:p-5 h-1/4 grid grid-cols-12">
+            <div className="col-span-12 md:col-span-8 md:p-5 h-full order-2 md:order-1">
+              {/* carousel of brands */}
+              <Brands
+                brands={brands}
+                setParams={setParams}
+                navigate={navigate}
+              />
+            </div>
+            <div className="col-span-12 md:col-span-4 p-1 md:p-5 md:pl-10 h-full order-1 md:order-2">
+              {/* title section */}
+              <div className="flex flex-col items-center justify-center h-full">
+                <h1 className="text-center lg:text-left text-3xl font-bold p-3 w-full">
+                  Shop all your favorite brands.
+                </h1>
+                {/* catchphrase */}
+                <h1 className="text-center lg:text-left text-xl font-light p-3 w-full">
+                  All your favorite brands in one place. Shop to your heart's
+                  content and be rewarded as you go.
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
-
         {/* mobile menu */}
         {/* absolute positioned filter button */}
         <div className="fixed bottom-2 right-3 m-2 md:hidden">
