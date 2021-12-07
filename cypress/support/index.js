@@ -14,7 +14,12 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+Cypress.on("uncaught:exception", (err, runnable) => {
+  if (err.message.includes("Request failed with status code 400")) {
+    return false;
+  }
+});
