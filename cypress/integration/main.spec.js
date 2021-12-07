@@ -173,4 +173,31 @@ describe("Redirects after Login", () => {
     cy.visit("/cart");
     cy.url().should("include", "/cart");
   });
+
+  it("should redirect to cart page when user click buy now button", () => {
+    cy.get(".slick-slider")
+      .eq(0)
+      .find(".slick-slide", "aria-hidden=[false]")
+      .find("button")
+      .contains("Buy Now")
+      .click({
+        force: true,
+      });
+
+    cy.url().should("include", "/cart");
+  });
+
+  it("should be able to add product to cart", () => {
+    cy.wait(5000);
+    cy.get(".slick-slider")
+      .eq(0)
+      .find(".slick-slide", "aria-hidden=[false]")
+      .find("button")
+      .contains("Add to Cart")
+      .click({
+        force: true,
+      });
+
+    cy.contains("Item added to cart").should("be.visible");
+  });
 });
