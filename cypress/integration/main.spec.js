@@ -189,6 +189,7 @@ describe("Redirects after Login", () => {
 
   it("should be able to add product to cart", () => {
     cy.wait(5000);
+
     cy.get(".slick-slider")
       .eq(0)
       .find(".slick-slide", "aria-hidden=[false]")

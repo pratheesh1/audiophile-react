@@ -107,7 +107,7 @@ function Listings() {
                       filterProducts();
                     }}
                   >
-                    Filter
+                    Filter Products
                   </button>
                 </div>
                 <div className="col-span-12 col-start-1 lg:col-start-4">
