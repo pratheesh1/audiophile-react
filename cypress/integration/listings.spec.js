@@ -3,7 +3,7 @@
 import Chance from "chance";
 const chance = new Chance();
 
-describe("Shop", () => {
+describe("Render Shop Page", () => {
   beforeEach(() => {
     cy.visit("/home");
   });
@@ -145,7 +145,35 @@ describe("Filter Products", () => {
       .its("request.url")
       .should("include", "impedanceRangeId[]");
   });
+
+  it("should reset filters", () => {
+    cy.intercept("GET", "/api/products*").as("searchProducts");
+
+    cy.get("button").contains("Reset Filters").click();
+
+    cy.wait("@searchProducts")
+      .its("request.url")
+      .should("not.include", "cost_min")
+      .should("not.include", "cost_max")
+      .should("not.include", "category")
+      .should("not.include", "brand")
+      .should("not.include", "bluetooth")
+      .should("not.include", "frequencyResponseId")
+      .should("not.include", "impedanceRangeId");
+  });
+
+  it("should validate price range field", () => {
+    cy.get("input[name=cost_min]").type("abc");
+    cy.get("input[name=cost_max]").type("abc");
+    cy.get("button").contains("Filter Products").click();
+    cy.contains("Please enter a valid price range").should("be.visible");
+
+    cy.get("input[name=cost_min]").type("100");
+    cy.get("input[name=cost_max]").type("abc");
+    cy.get("button").contains("Filter Products").click();
+    cy.contains("Please enter a valid price range").should("be.visible");
+  });
 });
 
-//add to cart and redirects from product cards are the same since they are the same components
-//hence the test is the same compared to main page and is not repeated
+//product cards are the same component as the main page
+//hence the user interaction is the same and the tests are therefore not repeated
