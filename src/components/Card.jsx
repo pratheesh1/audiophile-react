@@ -28,7 +28,7 @@ function Card({ product, addToCart }) {
 
   return (
     product && (
-      <div className="col-span-12 lg:col-span-6 2xl:col-span-4 p-3 hover:scale-105 flex justify-center">
+      <div className="col-span-12 lg:col-span-6 2xl:col-span-4 p-3 hover:scale-105 flex justify-center product-display-card">
         <div className="flex max-w-md bg-white shadow-md rounded-lg overflow-hidden">
           {product.image.length ? (
             <div
