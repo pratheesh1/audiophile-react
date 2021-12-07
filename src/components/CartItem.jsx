@@ -79,6 +79,7 @@ function CartItem({ product }) {
             <input
               className="mx-2 border text-center w-10 md:w-12"
               type="text"
+              name="quantity"
               value={product?.quantity}
               disabled={true}
             />
