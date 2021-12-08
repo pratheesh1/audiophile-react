@@ -15,7 +15,7 @@ describe("Renders Orders", () => {
     cy.contains("Order Details:").should("be.visible");
   });
 
-  it("makes proper api requests", () => {
+  it("makes proper api requests to get the user orders", () => {
     cy.intercept("GET", "/api/orders*").as("order");
     cy.visit("/orders");
 

@@ -78,6 +78,19 @@ describe("Validations", () => {
   });
 
   it("show error when cart is empty and user tries to checkout", () => {
+    cy.get("body").then(($body) => {
+      cy.wait(1000);
+      if ($body.find("span", ".remove-item-btn").length) {
+        cy.get(".remove-item-btn").each(($el, index) => {
+          cy.get(".remove-item-btn").first().click({
+            force: true,
+            timeout: 10000,
+          });
+          cy.wait(3000);
+        });
+      }
+    });
+
     cy.contains("button", "Checkout").click();
     cy.contains("Your cart is empty").should("be.visible");
   });

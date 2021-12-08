@@ -63,7 +63,7 @@ function CartItem({ product }) {
                 onClick={() =>
                   removeFromCart({ productId: product?.productId })
                 }
-                className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                className="font-semibold hover:text-red-500 text-gray-500 text-xs remove-item-btn"
               >
                 Remove
               </span>
