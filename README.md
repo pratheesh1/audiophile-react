@@ -28,11 +28,11 @@ This project is deployed on Netlify. The website can be accessed at the followin
 
 [https://vibrant-yalow-dab148.netlify.app/](https://vibrant-yalow-dab148.netlify.app/)
 
-The project uses tailwindcss which require css to be compiled. The current version of compiled css can be found in `src/styles` folder. The current build script should build css every time the project is updated, however, it is good idea to manually build css by running `postcss src/styles/tailwind.css -o src/styles/index.css` at least once during the deployment process.
+The project uses tailwindcss which require css to be compiled. The current version of compiled css can be found in `src/styles` folder. The current build script should build css every time the project is updated, however, it is a good idea to manually build css by running `postcss src/styles/tailwind.css -o src/styles/index.css` at least once before the deployment process.
 
 # 3. Website Features and Navigation
 
-This project website is free to browse, however user accounts need to be created to access cart and do checkout. The major features of this website are listed below:
+This website is free to browse, however user accounts need to be created to access cart and do checkout. The major features of this website are listed below:
 
 - Product Listing, searching, sorting, filtering and browsing
 
@@ -41,6 +41,10 @@ The website supports searching, sorting, filtering and browsing products. The pr
 - Cart, Checkout, Order History
 
 A logged in user can add products to cart, checkout and view order history.
+
+- A Contact Form
+
+There is a contact form on the website. The user can send a message to the website owner.
 
 ### 3.1 Navigation
 
@@ -51,11 +55,11 @@ The following tree shows a general direction in which one might navigate through
 │   └── Stripe Checkout
 ├── Contact Us
 ├── Home
-│   ├── Product Listing
+│   ├── Product Detailed View
 │   └── Cart
 ├── Login
 ├── Main
-│   ├── Product Listing
+│   ├── Product Detailed View
 │   └── Cart
 ├── Orders
 └── Register
@@ -117,7 +121,7 @@ The color palette for this website is designed to be light and vibrant and provi
 
 # 6. Testing
 
-There are no unit or integration tests for this project. E2E tests are done with [cypress](https://www.cypress.io/). A full E2E test is written for this project except for integration with stripe checkout api which cypress do not support as of now. There is a manual test written for this use case.
+There are no unit or integration tests for this project. E2E tests are done with [cypress](https://www.cypress.io/). A full E2E test is written for this project except for integration with stripe checkout api which cypress do not support as of `v9.1.1`. There is a manual test written for this use case.
 
 ## 6.1 Automated Tests
 
@@ -136,13 +140,11 @@ Pre-requisite for running the tests:
 To run the tests, run the following command in the terminal from the root directory of the project:
 
 ```
-
 npm install
 npm run test
-
 ```
 
-The recording of the tests maybe used as a reference to duplicate a test run.
+The recording of the tests maybe used as a reference to duplicate a test run. No flaky tests runs expected and can expect a fully passing test at every run.
 
 ## 6.2 Manual Tests
 
