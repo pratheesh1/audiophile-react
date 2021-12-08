@@ -63,7 +63,7 @@ The color palette for this website is designed to be light and vibrant and provi
 
 ## 6. Testing
 
-There are no unit or integration tests for this project. E2E tests are done with [cypress](https://www.cypress.io/). A full E2E test is written for this project except for integration with stripe checkout api which cypress do not support as of now. This manual test is written for this use case.
+There are no unit or integration tests for this project. E2E tests are done with [cypress](https://www.cypress.io/). A full E2E test is written for this project except for integration with stripe checkout api which cypress do not support as of now. There is a manual test written for this use case.
 
 ### 6.1 Automated Tests
 
@@ -74,10 +74,10 @@ The following google drive folder contains a recording of the test run:
 Pre-requisite for running the tests:
 
 - The backend api is up and running.
-- Update the api details in src/api/link.js
+- Update the api details in `src/api/link.js`
 - Update the server details in the `cypress.json` file.
 - In the cypress/fixtures folder, there are the following files:
-  - credentials.json: contains the credentials for the user that will be used for the tests. (The user account must already be in the database)
+  - `credentials.json`: contains the credentials for the user that will be used for the tests. (The user account must already be in the database)
 
 To run the tests, run the following command in the terminal from the root directory of the project:
 
@@ -93,6 +93,8 @@ The recording of the tests maybe used as a reference to duplicate a test run.
 ### 6.2 Manual Tests
 
 Manual test for integration with stripe checkout api is written in the following file:
+
+[https://docs.google.com/spreadsheets/d/1-lEZY6wUuWHPVHo5PxJAKrvK9IBliG3uwOrZz8mNVjc/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1-lEZY6wUuWHPVHo5PxJAKrvK9IBliG3uwOrZz8mNVjc/edit?usp=sharing)
 
 ## 7. Acknowledgements
 
